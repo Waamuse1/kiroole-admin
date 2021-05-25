@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Room Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Name (title)</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          placeholder="Deluxe Double Room	"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" id="" cols="20" rows="10"></textarea>
+      </div>
+      <div class="mb-3">
+          <label class="form-label">No of people</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="name"
+            placeholder="Number of people"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Charges Per Day</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="name"
+            placeholder="charges"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Total Units</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="name"
+            placeholder="Total Units"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Available Units</label>
+          <input
+            type="number" 
+            class="form-control"
+            formControlName="name"
+            placeholder="Available Units"
+          />
+        </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select
+          class="form-control form-select form-select-lg mb-3"
+          formControlName="status"
+        >
+          <option selected>Select status</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark">Update</button>
+  </div>
+  

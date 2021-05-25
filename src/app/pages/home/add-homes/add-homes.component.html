@@ -1,0 +1,151 @@
+<div class="dashborad-box">
+  <h4 class="title">Property Details</h4>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <label>Property title</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Property title"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <label>Property Description</label>
+          <textarea
+            class="form-control"
+            placeholder="Describe about your property"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Status</label>
+          <select class="form-control" id="">
+            <option value="">Available</option>
+            <option value="">Taken</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-control" id="">
+            <option value="">Types</option>
+            <option value="">Types</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Rooms</label>
+          <input type="number" class="form-control" placeholder="Rooms" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" class="form-control" placeholder="Price" />
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Payment Period</label>
+          <select class="form-control" id="">
+            <option value="">Monthly</option>
+            <option value="">Daily</option>
+            <option value="">Yearly</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Owner</label>
+          <select class="form-control" id="">
+            <option value="">Onsite</option>
+            <option value="">On Properties</option>
+            <option value="">another company</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dashborad-box">
+  <h3>property Media</h3>
+  <div class="property-form-group">
+    <div class="card">
+      
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input
+                  
+                  type="file"
+                  class="form-control"
+                  accept="image/*"
+                  multiple=""
+                  (change)="onFileChanged($event)"
+                  #fileInput
+                />
+                <!-- <button class="form-control" (click)="fileInput.click()">
+                 Select Property images
+                </button> -->
+              </div>
+            </div>
+            <div class="col-md-3" *ngFor="let url of images; index as i">
+              <div class="image-preview">
+                <span
+                  class="fa fa-times text-danger float-right"
+                  (click)="removeImage(i)"
+                ></span>
+                <img id="{{ 'image' + i }}" [src]="url.url" />
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="!url.isValid">
+                Low Resolution Image
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dashborad-box">
+  <h4 class="title">Property Location <i class="fa fa-hotel"></i></h4>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" class="form-control" placeholder="Country" />
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>City / Town</label>
+          <input type="text" class="form-control" placeholder="City / Town" />
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4">
+        <div class="form-group">
+          <label>Address</label>
+          <input type="number" class="form-control" placeholder="Address" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

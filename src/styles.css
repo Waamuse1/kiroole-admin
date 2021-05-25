@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-action{
+    margin-left: 10px;
+}
+.image-preview {
+    display: flex;
+    flex-direction: column;
+      height: 200px;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 5px;
+    }
+    .image-preview img {
+      height: 100%;
+      /* width: 100%; */
+      object-fit: contain;
+    }
+    .fa-times{
+      cursor: pointer;
+      opacity: 0;
+      transition:opacity 0.5s linear;
+      -moz-transition: opacity 0.5s linear;
+      -webkit-transition: opacity 0.5s linear;
+    }
+    .image-preview:hover .fa-times{
+      opacity: 1;      
+      transition:opacity 2s linear;
+     -moz-transition: opacity 2s linear;
+     -webkit-transition: opacity 2s linear;
+  
+    }

@@ -1,0 +1,55 @@
+<div class="dashborad-box">
+    <h4 class="title">Rooms</h4>
+    <button class="btn btn-primary" (click)="openAddRoomModal()" >New Rooms</button>
+    <div class="section-body listing-table">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Room type</th>
+                        <th>Room Units</th>
+                        <th>Charges</th>
+                        <th>Units Available</th>
+                        <th>Total Units</th>                        
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>                    
+                    <tr>
+                        <td>Standard Twin Room</td>
+                        <td>11</td>
+                        <td><span>{{220 | currency }}</span></td>
+                        <td>54</td>
+                        <td class="status"><span class="active">100</span></td>                        
+                        <td class="edit">
+                            <button class="btn btn-primary btn-action" (click)="openEditModal()">                               
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-primary btn-action">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Deluxe Double Room</td>
+                        <td>11</td>
+                        <td><span>{{220 | currency }}</span></td>
+                        <td>54</td>
+                        <td class="status"><span class="active">100</span></td>                        
+                        <td class="edit">
+                            <button class="btn btn-primary btn-action">
+                                <!-- <fa-icon class="fa" [icon]="editIcon"></fa-icon> -->
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-primary btn-action">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
