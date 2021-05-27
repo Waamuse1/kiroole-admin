@@ -36,6 +36,15 @@
                     <input type="text" class="form-control" placeholder="Physical Address" />
                   </div>
               </div>
+              <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                  <label>City</label>
+                  <select class="form-control" id="" >
+                    <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
+                                      
+                  </select>
+                </div>
+              </div>
           </div> 
           <div class="row">
             <div class="col-md-12">

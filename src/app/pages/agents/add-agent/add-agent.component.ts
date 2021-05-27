@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-agent.component.css']
 })
 export class AddAgentComponent implements OnInit {
+  cities = [
+    "Hargeisa", "Berbera",  "Burco", "Moqadisho"
+
+];
 
   constructor() { }
 

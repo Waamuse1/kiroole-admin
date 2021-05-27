@@ -24,9 +24,9 @@
               <div class="col-md-4 col-lg-4">
                 <div class="form-group">
                   <label>City</label>
-                  <select class="form-control" id="">
-                    <option value="">Onsite</option>
-                    <option value="">On Properties</option>                   
+                  <select class="form-control" id="" >
+                    <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
+                                      
                   </select>
                 </div>
               </div>
@@ -40,10 +40,54 @@
                 </div>
             </div>
         </div> 
-        <div class="row">
-          <div class="col-md-12">
-                  <button class="btn btn-primary" type="submit">Save</button>
-          </div>
-      </div>    
+          
     </div>
   </div>
+  <div class="dashborad-box">
+    <h3>Images</h3>
+    <div class="property-form-group">
+      <div class="card">
+        
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input
+                    
+                    type="file"
+                    class="form-control"
+                    accept="image/*"
+                    multiple=""
+                    (change)="onFileChanged($event)"
+                    #fileInput
+                  />
+                  <!-- <button class="form-control" (click)="fileInput.click()">
+                   Select Property images
+                  </button> -->
+                </div>
+              </div>
+              <div class="col-md-3" *ngFor="let url of images; index as i">
+                <div class="image-preview">
+                  <span
+                    class="fa fa-times text-danger float-right"
+                    (click)="removeImage(i)"
+                  ></span>
+                  <img id="{{ 'image' + i }}" [src]="url.url" />
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="!url.isValid">
+                  Low Resolution Image
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+            <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+</div> 
