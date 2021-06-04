@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-hotel',
-  templateUrl: './add-hotel.component.html',
-  styleUrls: ['./add-hotel.component.css']
+  selector: 'app-add-building',
+  templateUrl: './add-building.component.html',
+  styleUrls: ['./add-building.component.css']
 })
-export class AddHotelComponent implements OnInit {
+export class AddBuildingComponent implements OnInit {
   selectedFile: File
   imagePreview: string;
   images = [];
@@ -14,8 +14,6 @@ export class AddHotelComponent implements OnInit {
     "Hargeisa", "Berbera",  "Burco", "Moqadisho"
 
 ];
-lat = 51.678418;
-  lng = 7.809007;
 
   constructor() { }
 
@@ -99,6 +97,5 @@ lat = 51.678418;
       
     }
   }
-
 
 }

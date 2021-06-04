@@ -1,0 +1,37 @@
+<div class="dashborad-box">
+    <h4 class="title">Buildings $ Offices Units</h4>
+    <button class="btn btn-primary" [routerLink]="['/add-building']" >New Building</button>
+    <div class="section-body listing-table">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Building Name</th>
+                        <th>Location</th>
+                        <th>Number of Offices</th>
+                        <th>Contact Number</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr [routerLink]="['/building-details']" class="table-row">
+                        <td>Luxury Plaza</td>
+                        <td>23 Jan 2020</td>
+                        <td class="rating"><span>50</span></td>
+                        <td>0707200314</td>
+                        <td class="status"><span class=" active">Active</span></td>
+                        <td class="edit">
+                            <button class="btn btn-primary btn-action"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-primary btn-action"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>                    
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

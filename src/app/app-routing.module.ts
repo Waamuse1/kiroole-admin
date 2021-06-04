@@ -1,3 +1,6 @@
+import { AddBuildingComponent } from './pages/business/add-building/add-building.component';
+import { BuildingDetailsComponent } from './pages/business/building-details/building-details.component';
+import { BusinessListComponent } from './pages/business/business-list/business-list.component';
 import { AddHotelComponent } from './pages/hotel/add-hotel/add-hotel.component';
 import { HotelListComponent } from './pages/hotel/hotel-list/hotel-list.component';
 import { AddCarRentComponent } from './pages/car-rent/add-car-rent/add-car-rent.component';
@@ -22,7 +25,10 @@ const routes: Routes = [
   {path:"add-car", component:AddCarRentComponent},
   {path:"hotels", component:HotelListComponent},
   {path:"add-hotel", component:AddHotelComponent},
-  {path:"hotel-room-details", component:HotelRoomDetailsComponent}
+  {path:"hotel-room-details", component:HotelRoomDetailsComponent},
+  {path:"business", component:BusinessListComponent},
+  {path:"building-details",component:BuildingDetailsComponent}, 
+  {path:"add-building",component:AddBuildingComponent}
 ];
 
 @NgModule({
