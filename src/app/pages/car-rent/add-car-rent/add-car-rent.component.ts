@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,10 +11,18 @@ export class AddCarRentComponent implements OnInit {
   imagePreview: string;
   images = [];
   filesToUpload: Array<File> = [];
+  carForm:FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.initializeForm();
+  }
+  initializeForm(){
+    this.carForm = this.fb.group({
+
+    })
+
   }
   onFileChanged(event) {
     console.log("called");

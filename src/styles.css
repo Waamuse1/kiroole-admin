@@ -29,3 +29,6 @@
      -webkit-transition: opacity 2s linear;
   
     }
+    agm-map {
+      margin-bottom: 10px;
+    }

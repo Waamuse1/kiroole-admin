@@ -29,6 +29,7 @@ import { BusinessUnitListComponent } from './pages/business/business-unit-list/b
 import { BuildingDetailsComponent } from './pages/business/building-details/building-details.component';
 import { EditBusinessUnitComponent } from './pages/business/edit-business-unit/edit-business-unit.component';
 import { AgmCoreModule } from '@agm/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -61,8 +62,10 @@ import { AgmCoreModule } from '@agm/core';
     AppRoutingModule,
     FontAwesomeModule,
     NgbModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD_V9DCFWNkafi4QjyV--pdRL7wGO29-0Q'
+      apiKey: 'AIzaSyDUnDtzxWOs9Z5zBmJpNvSWq-Ttyv4vzfA',
+      libraries: ['places','geometry']
     })
     
   ],
