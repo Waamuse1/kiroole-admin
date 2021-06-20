@@ -11,60 +11,24 @@
                         <th>Owner Name</th>
                         <th>Mobile Number</th>
                         <th>Owner Name</th>
-                        <th>Email Address</th>
+                        <th>Address</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Luxury Restaurant</td>
-                        <td>23 Jan 2020</td>
-                        <td class="rating"><span>5.0</span></td>
-                        <td>0707200314</td>
-                        <td class="status"><span class=" active">Active</span></td>
-                        <td >mulwatech@gmail.com</td>
+                    <tr *ngFor="let agent of agents">
+                        <td>{{agent.agentName}}</td>
+                        <td>{{agent.phoneNumber}}</td>
+                        <td class="rating"><span>{{agent.ownerName}}</span></td>
+                        <td>{{agent.createdAt | date}}</td>
+                        <td class="status"><span class=" active">{{agent.isActive}}</span></td>
+                        <td >{{agent.agentName}}</td>
                         <td class="edit">
                             <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
                             <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Gym in Town</td>
-                        <td>11 Feb 2020</td>
-                        <td class="rating"><span>4.5</span></td>
-                        <td>0707200314</td>
-                        <td class="status"><span class="active">Active</span></td>
-                        <td class="pb-0">mulwatech@gmail.com</td>
-                        <td class="edit">
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cafe in Boston</td>
-                        <td>09 Jan 2020</td>
-                        <td class="rating"><span>5.0</span></td>
-                        <td>0707200314</td>
-                        <td class="status"><span class="non-active">Non-Active</span></td>
-                        <td class="pb-0">mulwatech@gmail.com</td>
-                        <td class="edit">
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="pb-0">Car Dealer in New York</td>
-                        <td class="pb-0">24 Feb 2018</td>
-                        <td class="rating pb-0"><span>4.5</span></td>
-                        <td>0707200314</td>
-                        <td class="status pb-0"><span class="active">Active</span></td>
-                        <td class="pb-0" >mulwatech@gmail.com</td>
-                        <td class="edit pb-0">
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
-                        </td>
-
-                    </tr>
+                    </tr>                
+                    
                 </tbody>
             </table>
         </div>

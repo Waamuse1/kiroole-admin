@@ -25,9 +25,9 @@ const routes: Routes = [
   {path:"add-car", component:AddCarRentComponent},
   {path:"hotels", component:HotelListComponent},
   {path:"add-hotel", component:AddHotelComponent},
-  {path:"hotel-room-details", component:HotelRoomDetailsComponent},
+  {path:"hotel-room-details/:id", component:HotelRoomDetailsComponent},
   {path:"business", component:BusinessListComponent},
-  {path:"building-details",component:BuildingDetailsComponent}, 
+  {path:"building-details/:id",component:BuildingDetailsComponent}, 
   {path:"add-building",component:AddBuildingComponent}
 ];
 

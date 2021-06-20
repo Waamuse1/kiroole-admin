@@ -1,28 +1,35 @@
 <div class="row">
-    <div class="col-md-6">
-        <div class="dashborad-box">
+    <div class="col-md-12">
+        <div class="dashboard-box">
             <h4 class="title">
-                Luxury Plaza Building
+                {{building?.buildingName | uppercase}}
             </h4>
             <div class="section-body listing-table">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <p>Location: </p>                        
-                    </li>
+                        <p>Location: {{ building?.locationAddress }} </p>                        
+                    </li>                    
                     <li class="list-group-item">
-                        <p>Office Units Available: 50 </p>                        
-                    </li>
-                    <li class="list-group-item">
-                        <p>Status: <span>Active</span> </p>                        
+                        <p>Status: {{building?.isActive ? "Active":"Not Active"}} </p>                        
                     </li>
                     
                   </ul>
                 
             </div>
-        </div>       
+        </div>  
+        <div class="dashboard-box">
+            <div class="section-body">
+                <div class="row">
+                    <div *ngFor="let image of building?.images" class="col-md-4">
+                        <img src="{{image}}" alt="" srcset="">
+                    </div>
+                </div>
+            </div>
+
+        </div>     
     </div>   
 </div>
 <div class="col-md-12">
-    <app-business-unit-list></app-business-unit-list>
+    <app-business-unit-list [buildingId]="buildingId" [offices]="offices"></app-business-unit-list>
 </div>
 

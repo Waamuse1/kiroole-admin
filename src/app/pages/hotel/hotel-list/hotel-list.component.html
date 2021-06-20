@@ -7,20 +7,18 @@
                 <thead>
                     <tr>
                         <th>Hotel Name</th>
-                        <th>Location</th>
-                        <th>Number of Rooms</th>
+                        <th>Location</th>                     
                         <th>Contact Number</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr [routerLink]="['/hotel-room-details']" class="table-row">
-                        <td>Luxury Restaurant</td>
-                        <td>23 Jan 2020</td>
-                        <td class="rating"><span>5.0</span></td>
-                        <td>0707200314</td>
-                        <td class="status"><span class=" active">Active</span></td>
+                    <tr *ngFor="let hotel of hotels" routerLink="/hotel-room-details/{{hotel.id}}" class="table-row" >
+                        <td>{{hotel.hotelName}}</td>
+                        <td>{{hotel.locationAddress}}</td>                       
+                        <td>{{hotel.contact}}</td>
+                        <td class="status"><span class=" active">{{hotel.isActive}}</span></td>
                         <td class="edit">
                             <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
                             <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>

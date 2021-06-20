@@ -7,7 +7,7 @@
                 <thead>
                     <tr>
                         <th>Room type</th>
-                        <th>Room Units</th>
+                        <th>No of People</th>
                         <th>Charges</th>
                         <th>Units Available</th>
                         <th>Total Units</th>                        
@@ -15,12 +15,12 @@
                     </tr>
                 </thead>
                 <tbody>                    
-                    <tr>
-                        <td>Standard Twin Room</td>
-                        <td>11</td>
-                        <td><span>{{220 | currency }}</span></td>
-                        <td>54</td>
-                        <td class="status"><span class="active">100</span></td>                        
+                    <tr *ngFor="let room of hotelRooms">
+                        <td>{{room.name}}</td>
+                        <td>{{room.noOfPeople}}</td>
+                        <td><span>{{room.chargesPerDay | currency }}</span></td>
+                        <td>{{room.availableUnits}}</td>
+                        <td class="status"><span class="active">{{room.totalUnits}}</span></td>                        
                         <td class="edit">
                             <button class="btn btn-primary btn-action" (click)="openEditModal()">                               
                                 <i class="fa fa-edit" aria-hidden="true"></i>
@@ -29,23 +29,7 @@
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Deluxe Double Room</td>
-                        <td>11</td>
-                        <td><span>{{220 | currency }}</span></td>
-                        <td>54</td>
-                        <td class="status"><span class="active">100</span></td>                        
-                        <td class="edit">
-                            <button class="btn btn-primary btn-action">
-                                <!-- <fa-icon class="fa" [icon]="editIcon"></fa-icon> -->
-                                <i class="fa fa-edit" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-primary btn-action">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>                   
+                    </tr>                                     
                 </tbody>
             </table>
         </div>

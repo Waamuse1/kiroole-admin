@@ -9,6 +9,7 @@
             <input
               type="text"
               class="form-control"
+              formControlName="title"
               placeholder="Enter Property title"
             />
           </div>
@@ -20,6 +21,7 @@
             <label>Property Description</label>
             <textarea
               class="form-control"
+              formControlName="description"
               placeholder="Describe about your property"
             ></textarea>
           </div>
@@ -29,7 +31,7 @@
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
             <label>Status</label>
-            <select class="form-control" id="">
+            <select class="form-control" id="" formControlName="status">
               <option value="">Available</option>
               <option value="">Taken</option>
             </select>
@@ -38,16 +40,16 @@
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
             <label>Type</label>
-            <select class="form-control" id="">
-              <option value="">Types</option>
-              <option value="">Types</option>
+            <select class="form-control" id="" formControlName="type" >
+              <option value="type">Types</option>
+              <option value="type">Types</option>
             </select>
           </div>
         </div>
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
             <label>Rooms</label>
-            <input type="number" class="form-control" placeholder="Rooms" />
+            <input type="number" formControlName="rooms" class="form-control" placeholder="Rooms" />
           </div>
         </div>
       </div>
@@ -56,26 +58,25 @@
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
             <label>Price</label>
-            <input type="number" class="form-control" placeholder="Price" />
+            <input type="number"formControlName="price" class="form-control" placeholder="Price" />
           </div>
         </div>
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
             <label>Payment Period</label>
-            <select class="form-control" id="">
-              <option value="">Monthly</option>
-              <option value="">Daily</option>
-              <option value="">Yearly</option>
+            <select class="form-control" id="" formControlName="paymentPeriod">
+              <option value="monthly">Monthly</option>
+              <option value="monthly">Daily</option>
+              <option value="monthly">Yearly</option>
             </select>
           </div>
         </div>
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
-            <label>Owner</label>
-            <select class="form-control" id="">
-              <option value="">Onsite</option>
-              <option value="">On Properties</option>
-              <option value="">another company</option>
+            <label>Agent (Owner)</label>
+            <select formControlName="owner" class="form-control">
+              <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.agentName}}</option>
+              
             </select>
           </div>
         </div>
@@ -155,8 +156,7 @@
             ></agm-marker>
           </agm-map>
         </div>
-      </div>
-      
+      </div>      
       <div class="row">
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
@@ -173,11 +173,15 @@
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
             <label>City / Town</label>
-            <input type="text" class="form-control" placeholder="City / Town" />
+            <input type="text" class="form-control" formControlName="city" placeholder="City / Town" />
           </div>
-        </div>
-        
+        </div>        
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
     </div>
   </div>
   

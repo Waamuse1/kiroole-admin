@@ -1,3 +1,4 @@
+import { HomesService } from './services/homes.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -30,6 +31,10 @@ import { BuildingDetailsComponent } from './pages/business/building-details/buil
 import { EditBusinessUnitComponent } from './pages/business/edit-business-unit/edit-business-unit.component';
 import { AgmCoreModule } from '@agm/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxUiLoaderModule } from "ngx-ui-loader";
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -60,16 +65,21 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FontAwesomeModule,
+    
     NgbModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NgxUiLoaderModule,
+    ToastrModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDUnDtzxWOs9Z5zBmJpNvSWq-Ttyv4vzfA',
       libraries: ['places','geometry']
     })
     
   ],
-  providers: [],
+  providers: [HomesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

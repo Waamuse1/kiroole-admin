@@ -1,7 +1,11 @@
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { AgentPayload } from './../../../payloads/agent.payload';
+import { AgentService } from './../../../services/agent.service';
 import { MapsAPILoader } from '@agm/core';
 import { Component, NgZone, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-agent',
@@ -23,9 +27,10 @@ latitude: number;
   public searchElementRef: ElementRef;
 
   constructor(private mapsAPILoader: MapsAPILoader,
-    private router:Router,private ngZone: NgZone,private fb:FormBuilder) { }
+    private router:Router,private ngZone: NgZone,private fb:FormBuilder,
+     private toastr: ToastrService,private agentService:AgentService, private ngxService: NgxUiLoaderService, ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.initializeForm();
     this.setCurrentLocation();
     this.initializeForm();
@@ -57,10 +62,18 @@ latitude: number;
   }
   initializeForm(){
     this.agentForm = this.fb.group({
+      agentName:['',Validators.required],
+      ownerName:['',Validators.required],
+      phoneNumber:['',Validators.required], 
+      city:['',Validators.required],
+      email:[''],     
       address:[{value: '', disabled: true}]
 
     });
 
+  }
+  get f_data() {
+    return this.agentForm.controls;
   }
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
@@ -97,6 +110,39 @@ latitude: number;
       }
 
     });
+  }
+
+  onsubmit(){
+    this.ngxService.start();
+    var agent:AgentPayload = {
+      "agentName":this.f_data.agentName.value,
+      "ownerName":this.f_data.ownerName.value,
+      "city":this.f_data.city.value,
+      "phoneNumber":this.f_data.phoneNumber.value.toString(),
+      "locationAddress":this.address,
+      "latitude":this.latitude,
+      "longitude":this.longitude,
+      "isActive":true
+    }
+
+    this.agentService.createAgent(agent).subscribe(res=>{
+      this.ngxService.stop();
+      console.log(res.status);
+      console.log(res.body);
+      if(res.status == 201){
+        this.toastr.success('Agent Added Successfully', 'Success ');
+        this.router.navigate(['/agents']);
+      }else {
+        this.toastr.error("Unable to add agent Please try again later","Error!");
+      }
+    },error=>{
+      console.log(error);
+      this.toastr.error("Unable to add agent Please try again later","Error!");
+
+      this.ngxService.stop();
+
+    })
+
   }
 
 }

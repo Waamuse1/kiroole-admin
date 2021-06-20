@@ -15,12 +15,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr [routerLink]="['/building-details']" class="table-row">
-                        <td>Luxury Plaza</td>
-                        <td>23 Jan 2020</td>
+                    <tr *ngFor="let building of buildings" routerLink="/building-details/{{building.id}}" class="table-row">
+                        <td>{{building.buildingName}}</td>
+                        <td>{{building.city}}</td>
                         <td class="rating"><span>50</span></td>
-                        <td>0707200314</td>
-                        <td class="status"><span class=" active">Active</span></td>
+                        <td>{{building.agent.phoneNumber}}</td>
+                        <td class="status"><span class=" active">{{building.isActive}}</span></td>
                         <td class="edit">
                             <button class="btn btn-primary btn-action"><i class="fa fa-edit"></i></button>
                             <button class="btn btn-primary btn-action"><i class="fa fa-trash"></i></button>

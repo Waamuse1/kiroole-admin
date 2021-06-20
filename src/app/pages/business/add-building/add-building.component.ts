@@ -1,4 +1,9 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { BuildingService } from './../../../services/building.service';
+import { AgentService } from './../../../services/agent.service';
+import { Agent } from './../../../models/homes_res.model';
+import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { Router } from '@angular/router';
@@ -22,15 +27,19 @@ latitude: number;
 longitude: number;
 zoom:number;
 address: string;
+agents:Agent[];
 private geoCoder;
 @ViewChild('search')
 public searchElementRef: ElementRef;
 
   constructor(private mapsAPILoader: MapsAPILoader,
-    private router:Router,private ngZone: NgZone,private fb:FormBuilder) { }
+    private router:Router,private ngZone: NgZone,private fb:FormBuilder,
+    private toast: ToastrService,private agentService:AgentService,private buildingService:BuildingService, 
+    private ngxService: NgxUiLoaderService,) { }
 
   ngOnInit(): void {
     this.setCurrentLocation();
+    this.getAgents();
     this.initializeForm();
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder;
@@ -60,9 +69,31 @@ public searchElementRef: ElementRef;
   }
   initializeForm(){
     this.buildingForm = this.fb.group({
+      buildingName:['',Validators.required],
+      city:['',Validators.required],
+      agentId:['',Validators.required],
       address:[{value: '', disabled: true}]
 
-    });
+    });    
+  }
+  get f_data(){
+    return this.buildingForm.controls;
+  }
+  getAgents(){
+    this.ngxService.start();
+    this.agentService.getAllAgents().subscribe(agent => {
+      this.ngxService.stop();
+      if(agent.status == 200){
+        this.agents = agent.body.data;
+        console.log(agent.body.data);
+      }else{
+        this.toast.error("Unable to get agents","Error!")
+      }
+    }, error => {
+      console.log(error);
+      this.toast.error("Unable to get agents","Error!")
+      this.ngxService.stop();
+    })
 
   }
   private setCurrentLocation() {
@@ -142,10 +173,13 @@ public searchElementRef: ElementRef;
 
   }
   onSubmit() {
+    this.ngxService.start();
     console.log("uploading images");
     let isValid = true;
     console.log(this.filesToUpload.length);
     if (this.filesToUpload.length < 1) {
+      this.toast.info('Building images required',"Info")
+      this.ngxService.stop();
       return;
     }
 
@@ -166,18 +200,50 @@ public searchElementRef: ElementRef;
 
     if (!isValid) {
       // return;
-  console.log('invalid checks')
+  console.log('invalid checks');
+  this.ngxService.stop();
+  this.toast.info("Low resolution image","Info");
+  return;
     }else{
       const formData = new FormData();
-      // formData.append('projectId', this.projectId);
+    formData.append('buildingName',this.f_data.buildingName.value),
+    formData.append('city',this.f_data.city.value),
+    formData.append('agentId',this.f_data.agentId.value),
+    formData.append('locationAddress',this.address),
+    formData.append('latitude',this.latitude.toString()),
+    formData.append('longitude',this.longitude.toString())
   
       for (let i = 0; i < this.filesToUpload.length; i++) {
   
         formData.append('images', this.filesToUpload[i]);
       }
+
+      this.buildingService.postBuilding(formData).subscribe(res => {
+        this.ngxService.stop();
+        if(res.status == 201){
+          this.toast.success('Building details added successfully', "Success");
+          this.buildingForm.reset();
+          this.filesToUpload = [];
+          this.router.navigate(['/business'])
+
+        }else {
+          this.toast.error('Unable to add Building details',"Error!");
+        }
+      }, error => {
+        this.ngxService.stop();
+        console.log(error);
+        this.toast.error('Unable to add Building details, Try again later',"Error!");
+
+
+      })
+
+      
   
       
     }
   }
+  
+
+  
 
 }

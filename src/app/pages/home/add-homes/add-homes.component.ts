@@ -1,7 +1,12 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Agent } from './../../../models/homes_res.model';
+import { HomesService } from './../../../services/homes.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
+import { ToastrService } from 'ngx-toastr';
+import { AgentService } from 'src/app/services/agent.service';
 
 @Component({
   selector: 'app-add-homes',
@@ -21,13 +26,17 @@ export class AddHomesComponent implements OnInit {
   private geoCoder;
   @ViewChild('search')
   public searchElementRef: ElementRef;
+  agents:Agent[];
 
   constructor(private mapsAPILoader: MapsAPILoader,
-    private router:Router,private ngZone: NgZone, private fb:FormBuilder) { }
+    private router:Router,private ngZone: NgZone, private fb:FormBuilder,private homeService:HomesService,
+    private toast: ToastrService,private agentService:AgentService, 
+    private ngxService: NgxUiLoaderService) { }
 
   ngOnInit(): void {
-    this.setCurrentLocation();
+    this.setCurrentLocation(); 
     this.initializeForm();
+    this.getAgents();
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder;
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
@@ -54,12 +63,42 @@ export class AddHomesComponent implements OnInit {
       })
     });
   }
+  getAgents(){
+    this.ngxService.start();
+    this.agentService.getAllAgents().subscribe(agent => {
+      this.ngxService.stop();
+      if(agent.status == 200){
+        this.agents = agent.body.data;
+        console.log(agent.body.data);
+      }else{
+        this.toast.error("Unable to get agents","Error!")
+      }
+    }, error => {
+      console.log(error);
+      this.toast.error("Unable to get agents","Error!")
+      this.ngxService.stop();
+    })
+
+  }
   initializeForm(){
-    this.homeForm = this.fb.group({      
+    this.homeForm = this.fb.group({
+      title:['',Validators.required],
+      description:['',Validators.required],
+      status:['', Validators.required],
+      type:['', Validators.required],
+      rooms:['',Validators.required],
+      price:['',Validators.required],
+      paymentPeriod:['',Validators.required],
+      owner:['',Validators.required],
+      city:['',Validators.required], 
       address:[{value: '', disabled: true}]
 
     })
   }
+  get f_data() {
+    return this.homeForm.controls;
+  }
+
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -137,10 +176,13 @@ export class AddHomesComponent implements OnInit {
 
   }
   onSubmit() {
-    console.log("uploading images");
+    this.ngxService.start();
+    
     let isValid = true;
     console.log(this.filesToUpload.length);
     if (this.filesToUpload.length < 1) {
+      this.toast.error('Upload image',"Image Error");
+      this.ngxService.stop()
       return;
     }
 
@@ -163,16 +205,53 @@ export class AddHomesComponent implements OnInit {
       // return;
   console.log('invalid checks')
     }else{
+      console.log(this.homeForm.value);
       const formData = new FormData();
-      // formData.append('projectId', this.projectId);
+      formData.append('agentId',this.f_data.owner.value);
+      formData.append('propertyName',this.f_data.title.value);
+      formData.append('propertyDescription',this.f_data.description.value);
+      formData.append('status',this.f_data.status.value);
+      formData.append('type',this.f_data.type.value),
+      formData.append('rooms',this.f_data.rooms.value);
+      formData.append('paymentPeriod',this.f_data.paymentPeriod.value);
+      formData.append('locationAddress',this.address);
+      formData.append('latitude', this.latitude.toString());
+      formData.append('longitude',this.longitude.toString());
+      formData.append('country',"somali");
+      formData.append('city',this.f_data.city.value)
+
   
-      for (let i = 0; i < this.filesToUpload.length; i++) {
-  
+      for (let i = 0; i < this.filesToUpload.length; i++) {  
         formData.append('images', this.filesToUpload[i]);
       }
+
+      console.log(formData);
+      this.homeService.postHome(formData).subscribe(res => {
+        this.ngxService.stop();
+        if(res.status == 201){
+          this.toast.success("Property added success full","Success");
+          this.filesToUpload = [];
+          this.router.navigate(['/homes']);
+          this.homeForm.reset();
+
+        }else{
+          this.toast.error('An error has occurred please try again later','Error');
+        }
+        console.log(res.body);
+        console.log(res.status);
+      },error => {
+        this.ngxService.stop();
+        this.toast.error('An error has occurred please try again later','Error');
+        console.log('an error has occured');
+        console.log(error);
+      })
   
       
     }
+  }
+
+  onSave(){
+    console.log(this.homeForm.value);
   }
 
 }

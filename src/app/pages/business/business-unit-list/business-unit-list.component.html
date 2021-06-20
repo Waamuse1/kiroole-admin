@@ -10,19 +10,19 @@
                         <th>Office Description</th>
                         <th> Size</th>
                         <th>Charges</th>
-                        <th>Units Available</th>
                         <th>Total Units</th>                        
+                        <th>Units Available</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>                    
-                    <tr>
-                        <td>Standard Twin Room</td>
-                        <td>Spacious office space with conducive working environment</td>
-                        <td>11 * 14 (L * W) meters</td>
-                        <td><span>{{220 | currency }}</span></td>
-                        <td>54</td>
-                        <td class="status"><span class="active">100</span></td>                        
+                    <tr *ngFor="let office of offices">
+                        <td>{{office.officeName}}</td>
+                        <td>{{office.description}}</td>
+                        <td>{{office.size}} meters</td>
+                        <td><span>{{office.charges | currency }}</span></td>
+                        <td>{{office.totalUnits}}</td>
+                        <td class="status"><span class="active">{{office.availableUnits}}</span></td>                        
                         <td class="edit">
                             <button class="btn btn-primary btn-action" (click)="openEditModal()">                               
                                 <i class="fa fa-edit" aria-hidden="true"></i>

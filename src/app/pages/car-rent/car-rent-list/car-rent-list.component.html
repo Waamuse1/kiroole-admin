@@ -12,18 +12,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr *ngFor="let vehicle of vehicles">
                 <td class="image myelist">
-                    <a href="single-property-1.html"><img alt="my-properties-3" src="assets/images/feature-properties/fp-1.jpg" class="img-fluid"></a>
+                    <a href="single-property-1.html"><img alt="my-properties-3" src="{{vehicle?.images[0]}}" class="img-fluid"></a>
+                    
                 </td>
                 <td>
                     <div class="inner">
-                        <a href="single-property-1.html"><h2>Volkswagen Polo</h2></a>
-                        <figure><i class="lni-map-marker"></i> Est St, 77 - Central Park South, NYC</figure>
+                        <a href="single-property-1.html"><h2>{{vehicle.vehicleMake}}</h2></a>
+                        <figure><i class="lni-map-marker"></i> {{vehicle?.agent?.locationAddress}}</figure>
                        
                     </div>
                 </td>
-                <td>08.14.2020</td>
+                <td>{{vehicle.createdAt | date}}</td>
                 <td>163</td>
                 <td class="actions">
                     <a href="#" class="edit"><i class="fa fa-edit"></i>Edit</a>

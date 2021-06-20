@@ -1,3 +1,8 @@
+import { HotelsService } from 'src/app/services/hotels.service';
+import { Agent } from './../../../models/homes_res.model';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { AgentService } from './../../../services/agent.service';
+import { ToastrService } from 'ngx-toastr';
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,35 +17,42 @@ export class AddHotelComponent implements OnInit {
   selectedFile: File
   imagePreview: string;
   images = [];
-  hotelForm:FormGroup;
+  hotelForm: FormGroup;
 
   filesToUpload: Array<File> = [];
-   cities = [
-    "Hargeisa", "Berbera",  "Burco", "Moqadisho"
+  cities = [
+    "Hargeisa", "Berbera", "Burco", "Moqadisho"
 
-];
+  ];
 
   latitude: number;
   longitude: number;
-  zoom:number;
+  zoom: number;
   address: string;
   private geoCoder;
   @ViewChild('search')
   public searchElementRef: ElementRef;
+  agents: Agent[];
+
 
   constructor(private mapsAPILoader: MapsAPILoader,
-    private router:Router,private ngZone: NgZone,private fb:FormBuilder) { }
+    private router: Router, private ngZone: NgZone,
+    private fb: FormBuilder, private toast:
+      ToastrService, private agentService: AgentService,
+      private hotelService:HotelsService,
+    private ngxService: NgxUiLoaderService,) { }
 
   ngOnInit(): void {
     this.setCurrentLocation();
     this.initializeForm();
+    this.getAgents();
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder;
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener('place_changed',()=>{
+      autocomplete.addListener('place_changed', () => {
         console.log('changed')
-        this.ngZone.run(()=>{
-          let place:google.maps.places.PlaceResult = autocomplete.getPlace();
+        this.ngZone.run(() => {
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
           autocomplete.setComponentRestrictions({
             country: ["ke"],
           })
@@ -49,23 +61,51 @@ export class AddHotelComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-           //set latitude, longitude and zoom
-           this.latitude = place.geometry.location.lat();
-           this.longitude = place.geometry.location.lng();
-           this.zoom = 12
-           this.getAddress(this.latitude, this.longitude);
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12
+          this.getAddress(this.latitude, this.longitude);
 
         })
 
       })
     });
   }
-  initializeForm(){
-    this.hotelForm = this.fb.group({      
-      address:[{value: '', disabled: true}]
+  initializeForm() {
+    this.hotelForm = this.fb.group({
+      hotelName: ['', Validators.required],
+      city: ['', Validators.required],
+      ownerId: ['', Validators.required],
+      noOfRooms: [''],
+      contact: ['', Validators.required],
+      address: [{ value: '', disabled: true }],
+
 
     })
   }
+  get f_data() {
+    return this.hotelForm.controls;
+  }
+  getAgents() {
+    this.ngxService.start();
+    this.agentService.getAllAgents().subscribe(agent => {
+      this.ngxService.stop();
+      if (agent.status == 200) {
+        this.agents = agent.body.data;
+        console.log(agent.body.data);
+      } else {
+        this.toast.error("Unable to get agents", "Error!")
+      }
+    }, error => {
+      console.log(error);
+      this.toast.error("Unable to get agents", "Error!")
+      this.ngxService.stop();
+    })
+
+  }
+
+
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -83,7 +123,7 @@ export class AddHotelComponent implements OnInit {
     this.getAddress(this.latitude, this.longitude);
   }
   getAddress(latitude, longitude) {
-  
+
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
       console.log(results);
       console.log(status);
@@ -143,10 +183,12 @@ export class AddHotelComponent implements OnInit {
 
   }
   onSubmit() {
+    this.ngxService.start();
     console.log("uploading images");
     let isValid = true;
     console.log(this.filesToUpload.length);
     if (this.filesToUpload.length < 1) {
+      this.ngxService.stop()
       return;
     }
 
@@ -167,19 +209,44 @@ export class AddHotelComponent implements OnInit {
 
     if (!isValid) {
       // return;
-  console.log('invalid checks')
-    }else{
+      console.log('invalid checks')
+    } else {
       const formData = new FormData();
-      // formData.append('projectId', this.projectId);
-  
+      formData.append("hotelName", this.f_data.hotelName.value),
+      formData.append("city", this.f_data.city.value),
+      formData.append("ownerId", this.f_data.ownerId.value),
+      formData.append("locationAddress", this.address),
+      formData.append("noOfRooms", this.f_data.noOfRooms.value),
+      formData.append("contact", this.f_data.contact.value),
+      formData.append("latitude", this.latitude.toString()),
+      formData.append("longitude", this.longitude.toString())
+      // formData.append("isActive",true),    
+
       for (let i = 0; i < this.filesToUpload.length; i++) {
-  
+
         formData.append('images', this.filesToUpload[i]);
       }
-  
+
+      this.hotelService.postHotel(formData).subscribe(res => {
+        this.ngxService.stop();
+        if(res.status == 201){
+          this.toast.success("Hotel Details added","Success");
+        }else{
+          this.toast.error("An error has Occurred","Error");
+        }
+      }, error => {
+        console.log(error);
+        this.ngxService.stop();
+        this.toast.error("An error has Occurred, Try again later","Error");
+
+        
+      })
       
+
+
     }
   }
+  
 
 
 }

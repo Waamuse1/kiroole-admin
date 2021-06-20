@@ -6,20 +6,20 @@
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
                   <label>Vehicle Make</label>
-                  <input type="text" class="form-control" placeholder="Vehicle Make" />
+                  <input type="text" class="form-control" formControlName="vehicleMake" placeholder="Vehicle Make" />
                 </div>
   
             </div>
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
                   <label>Vehicle Model</label>
-                  <input type="text" class="form-control" placeholder="Vehicle Model" />
+                  <input type="text" class="form-control" formControlName="vehicleModel" placeholder="Vehicle Model" />
                 </div>
             </div>
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
                   <label>Year</label>
-                  <input type="date" class="form-control" placeholder="date" />
+                  <input type="date" class="form-control" formControlName="manufactureYear" placeholder="date" />
                 </div>
             </div>
 
@@ -28,19 +28,19 @@
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
                   <label>Plate No</label>
-                  <input type="text" class="form-control" placeholder="Plate Number" />
+                  <input type="text" class="form-control" formControlName="plateNo" placeholder="Plate Number" />
                 </div>
             </div>
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
                   <label> No of Passages</label>
-                  <input type="text" class="form-control" placeholder="No of Passengers" />
+                  <input type="text" class="form-control" formControlName="noOfPassengers" placeholder="No of Passengers" />
                 </div>
             </div>
             <div class="col-md-4 col-lg-4">
                 <div class="form-group">
                     <label> Rate per Day</label>
-                    <input type="number" class="form-control" placeholder="Rate per day (USD)" />
+                    <input type="number" class="form-control" formControlName="ratePerDay" placeholder="Rate per day (USD)" />
                   </div>
               </div>
         </div>
@@ -48,10 +48,28 @@
             <div class="col-md-4 col-lg-4">
                 <div class="form-group">
                   <label>Agent (Owner)</label>
-                  <select class="form-control" id="">
-                    <option value="">Onsite</option>
-                    <option value="">On Properties</option>
-                    <option value="">another company</option>
+                  <select class="form-control" formControlName="agentId">
+                    <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.agentName}}</option>                    
+                  </select>
+                </div>
+              </div> 
+              <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                  <label>Transmission</label>
+                  <select class="form-control" formControlName="transmission">
+                    <option value="Automatic">Automatic</option>
+                    <option value="manual">Manual</option>
+                    <option value="hybrid">hybrid</option>
+                  </select>
+                </div>
+              </div> 
+              <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                  <label>Fuel</label>
+                  <select class="form-control" formControlName="fuel">
+                    <option value="Diesel">Diesel</option>
+                    <option value="Petroleum">Petroleum</option>
+                    <option value="Electric">Electric</option>
                   </select>
                 </div>
               </div>           
@@ -103,7 +121,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" (click)="onSubmit()" type="submit">Submit</button>
     </div>
 </div>
 

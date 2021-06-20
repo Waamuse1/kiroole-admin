@@ -1,30 +1,44 @@
+<div class="row mb-10" >
+    <div class="col-md-12">
+        <div class="dashboard-box">
+            <h4 class="title"> {{hotel?.hotelName | uppercase}}</h4>
+            <div class="section-body">
+                <div class="row">
+                    <div *ngFor="let image of hotel?.images" class="col-md-4 images">
+                        <img src="{{image}}" alt="" srcset="">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
         <div class="dashborad-box">
             <h4 class="title">
-                Luxury Restaurant
+               Other Details
             </h4>
             <div class="section-body listing-table">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <p>Location: </p>                        
+                        <p>Location: {{hotel?.locationAddress   }} </p>                        
                     </li>
                     <li class="list-group-item">
-                        <p>Rooms Available: </p>                        
+                        <p>Rooms Available: {{hotel?.noOfRooms}} </p>                        
                     </li>
                     <li class="list-group-item">
-                        <p>Status: <span>Active</span> </p>                        
+                        <p>City : {{hotel?.city}}</p>
+                        <!-- <p>Status: <span>Active</span> </p>                         -->
                     </li>
                     
                   </ul>
                 
             </div>
-        </div>
-        
-        
+        </div>     
         
     </div>
     <div class="col-md-8">
-        <app-room-details></app-room-details>
+        <app-room-details [hotelId]="hotelId"></app-room-details>
     </div>
 </div>

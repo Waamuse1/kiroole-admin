@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Home } from './../../../models/homes_res.model';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-homes-list',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homes-list.component.css']
 })
 export class HomesListComponent implements OnInit {
+  @Input()
+  homes:Home[];
 
   constructor() { }
 
