@@ -231,6 +231,8 @@ export class AddHotelComponent implements OnInit {
         this.ngxService.stop();
         if(res.status == 201){
           this.toast.success("Hotel Details added","Success");
+          this.router.navigate(['/hotels']);
+          this.hotelForm.reset();
         }else{
           this.toast.error("An error has Occurred","Error");
         }
