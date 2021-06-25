@@ -50,6 +50,32 @@
             <label>Contact Number</label>
             <input type="text" class="form-control" formControlName="contact" placeholder="Contact Number" />
           </div>
+        </div>        
+      </div>
+      <div class="row mb-10">
+        <div class="col-md-4 col-md-4">
+          <p>Hotel Amenities</p>
+          <div
+            formArrayName="amenities"
+            *ngFor="
+              let item of hotelForm.get('amenities')['controls'];
+              let i = index
+            "
+          >
+            <div formGroupName="{{i}}">
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="form-group">                                      
+                    <input class="form-control" formControlName="amenity" placeholder="Amenity" />
+                  </div> 
+                </div>
+                <div class="col-md-2">
+                  <button class="form-control" type="button" (click)="removeAmenity(i)" ><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </div>
+              </div>             
+            </div>
+          </div>
+          <button class="btn btn-primary button" (click)="addAmenity()">Add Amenity</button>
         </div>
       </div>
       <div class="row">

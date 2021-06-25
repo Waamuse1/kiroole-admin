@@ -1,7 +1,7 @@
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Agent } from './../../../models/homes_res.model';
 import { HomesService } from './../../../services/homes.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
@@ -27,6 +27,7 @@ export class AddHomesComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef: ElementRef;
   agents:Agent[];
+  amenities: FormArray;
 
   constructor(private mapsAPILoader: MapsAPILoader,
     private router:Router,private ngZone: NgZone, private fb:FormBuilder,private homeService:HomesService,
@@ -91,9 +92,23 @@ export class AddHomesComponent implements OnInit {
       paymentPeriod:['',Validators.required],
       owner:['',Validators.required],
       city:['',Validators.required], 
-      address:[{value: '', disabled: true}]
+      address:[{value: '', disabled: true}],
+      amenities:this.fb.array([this.createAmenity()])
 
     })
+  }
+  createAmenity(): FormGroup {
+    return this.fb.group({
+      amenity: '',
+      
+    });
+  }
+  addAmenity(): void {
+    this.amenities = <FormArray>this.homeForm.get('amenities') as FormArray;
+    this.amenities.push(this.createAmenity());
+  }
+  removeAmenity(index) {
+    this.amenities.removeAt(index);
   }
   get f_data() {
     return this.homeForm.controls;
@@ -159,6 +174,7 @@ export class AddHomesComponent implements OnInit {
   removeImage(index) {
     console.log(index);
     this.images.splice(index, 1);
+    
 
     let tempList = [];
     for (var j = 0; j < this.filesToUpload.length; j++) {
@@ -176,8 +192,8 @@ export class AddHomesComponent implements OnInit {
 
   }
   onSubmit() {
-    this.ngxService.start();
-    
+    let amenity:[] = this.f_data.amenities.value;
+    this.ngxService.start();   
     let isValid = true;
     console.log(this.filesToUpload.length);
     if (this.filesToUpload.length < 1) {
@@ -219,6 +235,11 @@ export class AddHomesComponent implements OnInit {
       formData.append('longitude',this.longitude.toString());
       formData.append('country',"somali");
       formData.append('city',this.f_data.city.value)
+
+      for(let i=0; i< amenity.length; i++){
+        console.log(amenity[i]['amenity']);
+        formData.append('amenities',amenity[i]['amenity']);
+      }
 
   
       for (let i = 0; i < this.filesToUpload.length; i++) {  

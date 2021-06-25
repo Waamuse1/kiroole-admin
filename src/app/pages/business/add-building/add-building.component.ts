@@ -3,7 +3,7 @@ import { AgentService } from './../../../services/agent.service';
 import { Agent } from './../../../models/homes_res.model';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { Router } from '@angular/router';
@@ -31,6 +31,7 @@ agents:Agent[];
 private geoCoder;
 @ViewChild('search')
 public searchElementRef: ElementRef;
+amenities: FormArray;
 
   constructor(private mapsAPILoader: MapsAPILoader,
     private router:Router,private ngZone: NgZone,private fb:FormBuilder,
@@ -72,9 +73,23 @@ public searchElementRef: ElementRef;
       buildingName:['',Validators.required],
       city:['',Validators.required],
       agentId:['',Validators.required],
-      address:[{value: '', disabled: true}]
+      address:[{value: '', disabled: true}],
+      amenities:this.fb.array([this.createAmenity()])
 
     });    
+  }
+  createAmenity(): FormGroup {
+    return this.fb.group({
+      amenity: '',
+      
+    });
+  }
+  addAmenity(): void {
+    this.amenities = <FormArray>this.buildingForm.get('amenities') as FormArray;
+    this.amenities.push(this.createAmenity());
+  }
+  removeAmenity(index) {
+    this.amenities.removeAt(index);
   }
   get f_data(){
     return this.buildingForm.controls;
@@ -173,6 +188,7 @@ public searchElementRef: ElementRef;
 
   }
   onSubmit() {
+    let amenity:[] = this.f_data.amenities.value;
     this.ngxService.start();
     console.log("uploading images");
     let isValid = true;
@@ -212,6 +228,12 @@ public searchElementRef: ElementRef;
     formData.append('locationAddress',this.address),
     formData.append('latitude',this.latitude.toString()),
     formData.append('longitude',this.longitude.toString())
+
+    for(let i=0; i< amenity.length; i++){
+      console.log(amenity[i]['amenity']);
+      formData.append('amenities',amenity[i]['amenity']);
+    } 
+
   
       for (let i = 0; i < this.filesToUpload.length; i++) {
   

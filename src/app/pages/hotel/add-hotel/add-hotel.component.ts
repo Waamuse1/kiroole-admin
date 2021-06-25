@@ -5,7 +5,7 @@ import { AgentService } from './../../../services/agent.service';
 import { ToastrService } from 'ngx-toastr';
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,6 +33,7 @@ export class AddHotelComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef: ElementRef;
   agents: Agent[];
+  amenities: FormArray;
 
 
   constructor(private mapsAPILoader: MapsAPILoader,
@@ -80,9 +81,23 @@ export class AddHotelComponent implements OnInit {
       noOfRooms: [''],
       contact: ['', Validators.required],
       address: [{ value: '', disabled: true }],
+      amenities:this.fb.array([this.createAmenity()])
 
 
     })
+  }
+  createAmenity(): FormGroup {
+    return this.fb.group({
+      amenity: '',
+      
+    });
+  }
+  addAmenity(): void {
+    this.amenities = <FormArray>this.hotelForm.get('amenities') as FormArray;
+    this.amenities.push(this.createAmenity());
+  }
+  removeAmenity(index) {
+    this.amenities.removeAt(index);
   }
   get f_data() {
     return this.hotelForm.controls;
@@ -183,8 +198,8 @@ export class AddHotelComponent implements OnInit {
 
   }
   onSubmit() {
-    this.ngxService.start();
-    console.log("uploading images");
+    let amenity:[] = this.f_data.amenities.value;
+    this.ngxService.start();   
     let isValid = true;
     console.log(this.filesToUpload.length);
     if (this.filesToUpload.length < 1) {
@@ -208,7 +223,8 @@ export class AddHotelComponent implements OnInit {
     }
 
     if (!isValid) {
-      // return;
+      this.ngxService.stop();
+      this.toast.info("Low resolution images","Warning !");
       console.log('invalid checks')
     } else {
       const formData = new FormData();
@@ -220,7 +236,11 @@ export class AddHotelComponent implements OnInit {
       formData.append("contact", this.f_data.contact.value),
       formData.append("latitude", this.latitude.toString()),
       formData.append("longitude", this.longitude.toString())
-      // formData.append("isActive",true),    
+      // formData.append("isActive",true),  
+      for(let i=0; i< amenity.length; i++){
+        console.log(amenity[i]['amenity']);
+        formData.append('amenities',amenity[i]['amenity']);
+      }  
 
       for (let i = 0; i < this.filesToUpload.length; i++) {
 
