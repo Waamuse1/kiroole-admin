@@ -1,3 +1,4 @@
+import { cities } from './../../../constants/global';
 import { HotelsService } from 'src/app/services/hotels.service';
 import { Agent } from './../../../models/homes_res.model';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -20,10 +21,7 @@ export class AddHotelComponent implements OnInit {
   hotelForm: FormGroup;
 
   filesToUpload: Array<File> = [];
-  cities = [
-    "Hargeisa", "Berbera", "Burco", "Moqadisho"
-
-  ];
+  cities = cities;
 
   latitude: number;
   longitude: number;

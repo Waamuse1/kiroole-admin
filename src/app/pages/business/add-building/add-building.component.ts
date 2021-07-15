@@ -1,3 +1,4 @@
+import { cities } from './../../../constants/global';
 import { BuildingService } from './../../../services/building.service';
 import { AgentService } from './../../../services/agent.service';
 import { Agent } from './../../../models/homes_res.model';
@@ -19,10 +20,7 @@ export class AddBuildingComponent implements OnInit {
   images = [];
   filesToUpload: Array<File> = [];
   buildingForm:FormGroup;
-   cities = [
-    "Hargeisa", "Berbera",  "Burco", "Moqadisho"
-
-];
+   cities = cities;
 latitude: number;
 longitude: number;
 zoom:number;

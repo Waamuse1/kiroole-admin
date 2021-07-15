@@ -11,11 +11,11 @@
         <tbody>
             <tr *ngFor="let home of homes">
                 <td class="image myelist">
-                    <a href="single-property-1.html"><img alt="my-properties-3" src="{{home?.images[0]}}" class="img-fluid"></a>
+                    <a routerLink="/home-details/{{home.id}}" ><img alt="my-properties-3" src="{{home?.images[0]}}" class="img-fluid"></a>
                 </td>
                 <td>
                     <div class="inner">
-                        <a href="single-property-1.html"><h2>{{home.propertyName}}</h2></a>
+                        <a routerLink="/home-details/{{home.id}}" ><h2>{{home.propertyName}}</h2></a>
                         <figure><i class="lni-map-marker"></i> {{home.locationAddress}}</figure>                        
                     </div>
                 </td>

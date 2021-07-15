@@ -1,3 +1,4 @@
+import { cities } from './../../../constants/global';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Agent } from './../../../models/homes_res.model';
 import { HomesService } from './../../../services/homes.service';
@@ -28,6 +29,7 @@ export class AddHomesComponent implements OnInit {
   public searchElementRef: ElementRef;
   agents:Agent[];
   amenities: FormArray;
+  cities = cities;
 
   constructor(private mapsAPILoader: MapsAPILoader,
     private router:Router,private ngZone: NgZone, private fb:FormBuilder,private homeService:HomesService,

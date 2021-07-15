@@ -19,6 +19,7 @@ import { EditCarComponent } from './pages/car-rent/edit-car/edit-car.component';
 
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent},
+  {path:"",redirectTo:'/homes',pathMatch:'full'},
   {path:"homes", component:HomesComponent},
   {path:"home-details/:id", component:EditHomeComponent},
   {path:"agents", component: AgentListComponent},
@@ -36,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

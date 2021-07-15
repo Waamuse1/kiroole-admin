@@ -1,3 +1,4 @@
+import { cities } from './../../../constants/global';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AgentPayload } from './../../../payloads/agent.payload';
 import { AgentService } from './../../../services/agent.service';
@@ -14,10 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddAgentComponent implements OnInit {
   agentForm:FormGroup;
-  cities = [
-    "Hargeisa", "Berbera",  "Burco", "Moqadisho"
-
-];
+  cities = cities;
 latitude: number;
   longitude: number;
   zoom:number;
