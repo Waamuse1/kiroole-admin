@@ -2,7 +2,7 @@
     <h4 class="title">Rooms</h4>
     <button class="btn btn-primary" (click)="openAddRoomModal()" >New Rooms</button>
     <div class="section-body listing-table">
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="hotelRooms.length > 0; else noRooms">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -33,6 +33,9 @@
                 </tbody>
             </table>
         </div>
+        <ng-template #noRooms>
+            <p class="mt-10">No Rooms Available for this Hotel Please add Rooms</p>
+        </ng-template>
     </div>
 </div>
 

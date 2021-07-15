@@ -1,3 +1,4 @@
+import { SliderData } from './../../hotel/hotel-room-details/hotel-room-details.component';
 import { Building, BuildingOffice } from './../../../models/building_office.res.model';
 import { BuildingService } from './../../../services/building.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +15,7 @@ export class BuildingDetailsComponent implements OnInit {
   buildingId;
   offices:BuildingOffice[];
   building:Building;
+  imageObject:SliderData[] = [];
 
   constructor(private route:ActivatedRoute,
      private ngxService: NgxUiLoaderService,private toast: ToastrService,private buildingService:BuildingService) { }
@@ -30,6 +32,7 @@ export class BuildingDetailsComponent implements OnInit {
       this.ngxService.stop();
       if(res.status == 200){
         this.offices = res.body.data;
+        
 
       }
     },error => {
@@ -42,10 +45,21 @@ export class BuildingDetailsComponent implements OnInit {
   getBuildingDetails(buildingId){
     this.buildingService.getSingleBuilding(buildingId).subscribe(res=> {
       this.building = res.body.data;
+      this.building.images.map(res => {
+        this.imageObject.push({
+          image:res,
+          thumbImage:res
+        });
+        console.log(this.imageObject.length)
+      })
     }, error => {
       console.log('unable to get building details');
     })
 
+  }
+  onLoadEvent(event){
+    this.getBuildingOffices(this.buildingId);
+    console.log('reload main page',event);
   }
 
 

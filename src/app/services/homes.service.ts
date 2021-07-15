@@ -1,3 +1,4 @@
+import { SingleHomeResponse } from './../models/single_home_res';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../constants/global';
@@ -18,6 +19,12 @@ export class HomesService {
 
   getAllHomes(){
     return this.http.get<HomesResponse>(`${config.apiUrl}homes`, {
+      observe: "response",     
+    });
+  }
+
+  getSingleHomes(homeId){
+    return this.http.get<SingleHomeResponse>(`${config.apiUrl}homes/${homeId}`, {
       observe: "response",     
     });
   }

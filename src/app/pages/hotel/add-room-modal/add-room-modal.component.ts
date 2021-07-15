@@ -39,8 +39,8 @@ export class AddRoomModalComponent implements OnInit {
 
   
 
-  closeModal(){
-    this.activeModal.close(false);
+  closeModal(reload:boolean){
+    this.activeModal.close(reload);
   }
   get f_data(){
     return this.roomForm.controls;
@@ -62,7 +62,7 @@ export class AddRoomModalComponent implements OnInit {
       this.ngxService.stop()
       if(res.status == 201){
         this.toast.success('Room added successfully','Success !');
-        this.closeModal();
+        this.closeModal(true);
 
       }
     }, error => {

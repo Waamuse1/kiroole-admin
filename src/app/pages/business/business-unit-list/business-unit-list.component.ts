@@ -1,6 +1,6 @@
 import { BuildingOffice } from './../../../models/building_office.res.model';
 import { AddBusinessUnitComponent } from './../add-business-unit/add-business-unit.component';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditBusinessUnitComponent } from '../edit-business-unit/edit-business-unit.component';
 
@@ -14,18 +14,22 @@ export class BusinessUnitListComponent implements OnInit {
   buildingId;
   @Input()
   offices:BuildingOffice[];
+  @Output()
+   loadEvent = new EventEmitter<boolean>();
 
   constructor(private modalService: NgbModal,) { }
 
   ngOnInit(): void {
   }
-  openAddRoomModal(){
+  openAddRoomModal(){ 
     const modalRef = this.modalService.open(AddBusinessUnitComponent);
     modalRef.componentInstance.buildingId=this.buildingId;
-    modalRef.result.then((result) => {
-      // if (result) { 
-      // console.log(result);
-      // }
+    modalRef.result.then((result) => {      
+      console.log(result);
+      if (result) { 
+        this.sendLoadEvent();
+        console.log('send edit event');
+      }
       });
 
   }
@@ -39,5 +43,10 @@ export class BusinessUnitListComponent implements OnInit {
       });
 
   }
+  sendLoadEvent() {
+    this.loadEvent.emit(true);
+  }
+  
+
 
 }

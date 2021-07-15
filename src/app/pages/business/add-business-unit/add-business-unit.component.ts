@@ -43,8 +43,9 @@ export class AddBusinessUnitComponent implements OnInit {
     return this.businessUnitForm.controls;
   }
  
-  closeModal(){
-    this.activeModal.close(false);
+  closeModal(reload:boolean){
+    console.log('close modal called');
+    this.activeModal.close(reload);
   }
   onSave(){
     this.ngxService.start();
@@ -65,7 +66,7 @@ export class AddBusinessUnitComponent implements OnInit {
       if(res.status == 201){
         console.log(res.body);
         this.toast.success('Office added successfully','Success');
-        this.closeModal();
+        this.closeModal(true);
         
 
       }

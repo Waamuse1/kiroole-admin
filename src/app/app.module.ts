@@ -35,6 +35,9 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { EditHomeComponent } from './pages/home/edit-home/edit-home.component';
+import { EditCarComponent } from './pages/car-rent/edit-car/edit-car.component';
 
 @NgModule({
   declarations: [
@@ -60,14 +63,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddBusinessUnitComponent,
     BusinessUnitListComponent,
     BuildingDetailsComponent,
-    EditBusinessUnitComponent
+    EditBusinessUnitComponent,
+    EditHomeComponent,
+    EditCarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    
+    NgImageSliderModule,      
     NgbModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

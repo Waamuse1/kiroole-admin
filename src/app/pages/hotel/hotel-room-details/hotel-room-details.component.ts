@@ -12,6 +12,7 @@ export class HotelRoomDetailsComponent implements OnInit {
   hotelId;
  id:string;
  hotel:Hotel;
+ imageObject:SliderData[] = [];
 
   constructor(private route: ActivatedRoute,private hotelService:HotelsService) { }
 
@@ -24,8 +25,22 @@ export class HotelRoomDetailsComponent implements OnInit {
   getHotelDetails(){
     this.hotelService.getSingleHotel(this.hotelId).subscribe(res => {
       this.hotel = res.body.data;
+      this.hotel.images.map(res => {
+        console.log(res);
+        this.imageObject.push({
+          image:res,
+          thumbImage:res
+        });
+        console.log(this.imageObject.length)
+      })
     })    
     
   }
 
+}
+
+export class SliderData {
+  image:string;
+  thumbImage:string;
+  title?:string;
 }

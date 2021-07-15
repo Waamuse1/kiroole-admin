@@ -4,8 +4,7 @@
             <tr>
                 <th class="pl-2">Houses</th>
                 <th class="p-0"></th>
-                <th>Date Added</th>
-                <th>Views</th>
+                <th>Date Added</th>               
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,14 +15,13 @@
                 </td>
                 <td>
                     <div class="inner">
-                        <a href="single-property-1.html"><h2>Luxury {{home.propertyName}}</h2></a>
+                        <a href="single-property-1.html"><h2>{{home.propertyName}}</h2></a>
                         <figure><i class="lni-map-marker"></i> {{home.locationAddress}}</figure>                        
                     </div>
                 </td>
-                <td>{{home.createdAt | date}}</td>
-                <td>163</td>
+                <td>{{home.createdAt | date}}</td>               
                 <td class="actions">
-                    <a href="#" class="edit"><i class="lni-pencil"></i>Edit</a>
+                    <a routerLink="/home-details/{{home.id}}"   class="edit"><i class="lni-pencil"></i>Edit</a>
                     <a href="#"><i class="far fa-trash-alt"></i></a>
                 </td>
             </tr>     

@@ -1,7 +1,7 @@
 <div class="dashborad-box">
     <h4 class="title">Office Units</h4>
     <button class="btn btn-primary" (click)="openAddRoomModal()" >New Office Unit</button>
-    <div class="section-body listing-table">
+    <div class="section-body listing-table" *ngIf="offices?.length > 0 ; else noOffices">
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -36,6 +36,9 @@
             </table>
         </div>
     </div>
+    <ng-template #noOffices>
+        <p class="mt-10">No Office belonging to this building</p>
+    </ng-template>
 </div>
 
 

@@ -31,27 +31,11 @@
       <div class="row">
         <div class="col-md-4 col-lg-4">
           <div class="form-group">
-            <label>Search Location</label>
-            <input
-              type="text"
-              class="form-control"
-              (keydown.enter)="$event.preventDefault()"
-              placeholder="Search Nearest Location"
-              autocorrect="off"
-              autocapitalize="off"
-              spellcheck="off"
-              type="text"
-              #search
-            />
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-4">
-          <div class="form-group">
             <label>Contact Number</label>
             <input type="text" class="form-control" formControlName="contact" placeholder="Contact Number" />
           </div>
-        </div>        
-      </div>
+        </div> 
+      </div>      
       <div class="row mb-10">
         <div class="col-md-4 col-md-4">
           <p>Hotel Amenities</p>
@@ -77,6 +61,24 @@
           </div>
           <button class="btn btn-primary button" (click)="addAmenity()">Add Amenity</button>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <label>Search Location</label>
+            <input
+              type="text"
+              class="form-control"
+              (keydown.enter)="$event.preventDefault()"
+              placeholder="Search Nearest Location"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="off"
+              type="text"
+              #search
+            />
+          </div>
+        </div>              
       </div>
       <div class="row">
         <div class="col-md-12">

@@ -1,32 +1,50 @@
-import { Router } from '@angular/router';
-import { CarService } from './../../../services/car.service';
-import { AgentService } from './../../../services/agent.service';
+import { Agent } from './../../../models/agents_res.model';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Agent } from 'src/app/models/agents_res.model';
+import { AgentService } from 'src/app/services/agent.service';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
-  selector: 'app-add-car-rent',
-  templateUrl: './add-car-rent.component.html',
-  styleUrls: ['./add-car-rent.component.css']
+  selector: 'app-edit-car',
+  templateUrl: './edit-car.component.html',
+  styleUrls: ['./edit-car.component.css']
 })
-export class AddCarRentComponent implements OnInit {
+export class EditCarComponent implements OnInit {
   selectedFile: File
   imagePreview: string;
   images = [];
   filesToUpload: Array<File> = [];
   carForm:FormGroup;
   agents:Agent[];
+  vehicleId;
 
   constructor(private fb: FormBuilder,private toast: ToastrService,private agentService:AgentService, 
-    private ngxService: NgxUiLoaderService,private carService:CarService,private router:Router) { }
+    private ngxService: NgxUiLoaderService,private carService:CarService,private router:Router,private route:ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.initializeForm();
+    this.vehicleId =String(this.route.snapshot.paramMap.get('id')); 
     this.getAgents();
+    this.carService.getSingleVehicle(this.vehicleId).subscribe(res => {
+      console.log(res.body.data);
+      this.carForm.patchValue({
+        agentId:res.body.data.agent.id,
+      vehicleMake:res.body.data.vehicleMake,
+      vehicleModel:res.body.data.vehicleModel,
+      manufactureYear:res.body.data.manufactureYear,
+      plateNo:res.body.data.plateNo,
+      noOfPassengers:res.body.data.noOfPassengers,
+      ratePerDay:res.body.data.ratePerDay,
+      transmission:res.body.data.transmission,
+      fuel:res.body.data.fuel
+        
+      })
+    })
   }
+
   initializeForm(){
     this.carForm = this.fb.group({
       agentId:['',Validators.required],
@@ -101,6 +119,7 @@ export class AddCarRentComponent implements OnInit {
   get f_data() {
     return this.carForm.controls;
   }
+
   onSubmit() {
     this.ngxService.start();
     console.log("uploading images");
@@ -128,7 +147,7 @@ export class AddCarRentComponent implements OnInit {
     }
 
     if (!isValid) {
-      this.toast.info('Low Resolution image, Please select another Image',"Warning");
+      this.toast.info('Low Resolution image',"Warning");
       this.ngxService.stop();
       return;
  
@@ -169,7 +188,5 @@ export class AddCarRentComponent implements OnInit {
       
     }
   }
-  
-
 
 }

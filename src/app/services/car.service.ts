@@ -1,3 +1,4 @@
+import { SingleVehicleRes } from './../models/single_vehicle.res';
 import { config } from './../constants/global';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -18,6 +19,12 @@ export class CarService {
 
   getAllVehicles(){
     return this.http.get<VehicleRes>(`${config.apiUrl}vehicle`, {
+      observe: "response",     
+    });
+  }
+
+  getSingleVehicle(vehicleId){
+    return this.http.get<SingleVehicleRes>(`${config.apiUrl}vehicle/${vehicleId}`, {
       observe: "response",     
     });
   }

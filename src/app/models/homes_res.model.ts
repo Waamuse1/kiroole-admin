@@ -26,7 +26,9 @@ export interface Home {
     longitude: string;
     country: string;
     city: string;
+    price:number;
     images: string[];
+    amenities:string[];
     agent: Agent;
 }
 

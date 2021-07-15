@@ -1,3 +1,4 @@
+import { EditHomeComponent } from './pages/home/edit-home/edit-home.component';
 import { AddBuildingComponent } from './pages/business/add-building/add-building.component';
 import { BuildingDetailsComponent } from './pages/business/building-details/building-details.component';
 import { BusinessListComponent } from './pages/business/business-list/business-list.component';
@@ -13,16 +14,19 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HotelRoomDetailsComponent } from './pages/hotel/hotel-room-details/hotel-room-details.component';
+import { EditCarComponent } from './pages/car-rent/edit-car/edit-car.component';
 
 
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent},
   {path:"homes", component:HomesComponent},
+  {path:"home-details/:id", component:EditHomeComponent},
   {path:"agents", component: AgentListComponent},
   {path:"add-agent", component:AddAgentComponent},
   {path:"add-home",component:AddHomesComponent},
   {path:"car-rent", component:CarRentListComponent},
   {path:"add-car", component:AddCarRentComponent},
+  {path:"car-details/:id", component:EditCarComponent},
   {path:"hotels", component:HotelListComponent},
   {path:"add-hotel", component:AddHotelComponent},
   {path:"hotel-room-details/:id", component:HotelRoomDetailsComponent},

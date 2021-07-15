@@ -4,14 +4,18 @@
             <h4 class="title"> {{hotel?.hotelName | uppercase}}</h4>
             <div class="section-body">
                 <div class="row">
-                    <div *ngFor="let image of hotel?.images" class="col-md-4 images">
-                        <img src="{{image}}" alt="" srcset="">
-                    </div>
+                    <ng-image-slider #nav
+                        [images]="imageObject"
+                        [infinite]="false"
+                        [autoSlide]="1"
+                        [imageSize]="{width: '50%', height: '50%'}"
+                        slideImage="1"></ng-image-slider>
+                  
                 </div>
                 
             </div>
         </div>
-    </div>
+    </div> 
 </div>
 <div class="row">
     <div class="col-md-4">

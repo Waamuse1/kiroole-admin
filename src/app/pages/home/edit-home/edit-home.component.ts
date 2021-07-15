@@ -1,19 +1,19 @@
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { Agent } from './../../../models/homes_res.model';
 import { HomesService } from './../../../services/homes.service';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { MapsAPILoader } from '@agm/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { AgentService } from './../../../services/agent.service';
 import { ToastrService } from 'ngx-toastr';
-import { AgentService } from 'src/app/services/agent.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MapsAPILoader } from '@agm/core';
+import { Agent } from './../../../models/agents_res.model';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ElementRef, ViewChild, NgZone } from '@angular/core';
 
 @Component({
-  selector: 'app-add-homes',
-  templateUrl: './add-homes.component.html',
-  styleUrls: ['./add-homes.component.css']
+  selector: 'app-edit-home',
+  templateUrl: './edit-home.component.html',
+  styleUrls: ['./edit-home.component.css']
 })
-export class AddHomesComponent implements OnInit {
+export class EditHomeComponent implements OnInit {
   selectedFile: File
   imagePreview: string;
   images = [];
@@ -28,8 +28,9 @@ export class AddHomesComponent implements OnInit {
   public searchElementRef: ElementRef;
   agents:Agent[];
   amenities: FormArray;
+  houseId;
 
-  constructor(private mapsAPILoader: MapsAPILoader,
+  constructor(private mapsAPILoader: MapsAPILoader,private route:ActivatedRoute,
     private router:Router,private ngZone: NgZone, private fb:FormBuilder,private homeService:HomesService,
     private toast: ToastrService,private agentService:AgentService, 
     private ngxService: NgxUiLoaderService) { }
@@ -63,6 +64,33 @@ export class AddHomesComponent implements OnInit {
 
       })
     });
+    this.houseId =String(this.route.snapshot.paramMap.get('id')); 
+
+    this.homeService.getSingleHomes(this.houseId).subscribe(res => {
+       // set values to the form
+    this.homeForm.patchValue({
+      title:res.body.data.propertyName,
+      description:res.body.data.propertyDescription,
+      status:res.body.data.status,
+      type:res.body.data.status,
+      rooms:res.body.data.rooms,
+      price:res.body.data.price,
+      paymentPeriod:res.body.data.paymentPeriod,
+      owner:res.body.data.agent.id,
+      city:res.body.data.city, 
+      address:res.body.data.locationAddress,
+      // amenities:res.body.data.amenities.map(amenity => [{amenity:amenity}])
+      
+      // amenities.patchValue([{amenity:"HH"},{amenity:"HH"}])
+
+    })
+
+
+    })
+
+
+   
+    
   }
   getAgents(){
     this.ngxService.start();
@@ -81,6 +109,7 @@ export class AddHomesComponent implements OnInit {
     })
 
   }
+
   initializeForm(){
     this.homeForm = this.fb.group({
       title:['',Validators.required],
@@ -130,6 +159,7 @@ export class AddHomesComponent implements OnInit {
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
+
   getAddress(latitude, longitude) {
   
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
@@ -149,7 +179,9 @@ export class AddHomesComponent implements OnInit {
       }
 
     });
+
   }
+
   onFileChanged(event) {
     console.log("called");
     this.filesToUpload = event.target.files;
@@ -218,11 +250,8 @@ export class AddHomesComponent implements OnInit {
     }
 
     if (!isValid) {
-      this.toast.info('Low Resolution image, Please select another Image',"Warning");
-      this.ngxService.stop();
-      return;
-   
- 
+      // return;
+  console.log('invalid checks')
     }else{
       console.log(this.homeForm.value);
       const formData = new FormData();
@@ -274,9 +303,8 @@ export class AddHomesComponent implements OnInit {
       
     }
   }
+  
 
-  onSave(){
-    console.log(this.homeForm.value);
-  }
+
 
 }
