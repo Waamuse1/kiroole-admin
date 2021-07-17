@@ -117,6 +117,26 @@
           </div>
           <button type="button" (click)="addAmenity()">Add Amenity</button>
         </div>
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <label>Home Type</label>
+            <select class="form-control" formControlName="homeType">
+              <option *ngFor="let type of house_types" value="{{ type }}">
+                {{ type }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <label>Furniture</label>
+            <select class="form-control" formControlName="furniture">
+              <option *ngFor="let furniture of furniture" value="{{ furniture }}">
+                {{ furniture }}
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>

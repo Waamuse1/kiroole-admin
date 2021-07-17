@@ -1,4 +1,4 @@
-import { cities } from './../../../constants/global';
+import { cities, furniture, homeTypes } from './../../../constants/global';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Agent } from './../../../models/homes_res.model';
 import { HomesService } from './../../../services/homes.service';
@@ -30,6 +30,9 @@ export class AddHomesComponent implements OnInit {
   agents:Agent[];
   amenities: FormArray;
   cities = cities;
+  house_types = homeTypes;
+  furniture = furniture;
+
 
   constructor(private mapsAPILoader: MapsAPILoader,
     private router:Router,private ngZone: NgZone, private fb:FormBuilder,private homeService:HomesService,
@@ -93,7 +96,9 @@ export class AddHomesComponent implements OnInit {
       price:['',Validators.required],
       paymentPeriod:['',Validators.required],
       owner:['',Validators.required],
-      city:['',Validators.required], 
+      city:['',Validators.required],
+      furniture:['',Validators.required],
+      homeType:['',Validators.required], 
       address:[{value: '', disabled: true}],
       amenities:this.fb.array([this.createAmenity()])
 
@@ -240,12 +245,17 @@ export class AddHomesComponent implements OnInit {
       formData.append('latitude', this.latitude.toString());
       formData.append('longitude',this.longitude.toString());
       formData.append('country',"somali");
-      formData.append('city',this.f_data.city.value)
+      formData.append('city',this.f_data.city.value);
+      formData.append('furniture',this.f_data.furniture.value);
+      formData.append('houseType',this.f_data.homeType.value)
+
 
       for(let i=0; i< amenity.length; i++){
         console.log(amenity[i]['amenity']);
         formData.append('amenities',amenity[i]['amenity']);
       }
+
+      console.log(formData);
 
   
       for (let i = 0; i < this.filesToUpload.length; i++) {  
