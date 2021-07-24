@@ -21,5 +21,11 @@ export class AgentService {
       observe: "response",     
     });
   }
+
+  postEquipment(formData:FormData){
+    return this.http.post(`${config.apiUrl}equipment`,formData, {
+      observe: "response",     
+    },);
+  }
  
 }

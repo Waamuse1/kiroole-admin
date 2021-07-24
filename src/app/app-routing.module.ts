@@ -1,3 +1,5 @@
+import { AddEquipmentComponent } from './pages/equipments/add-equipment/add-equipment.component';
+import { EquipmentsComponent } from './pages/equipments/equipments.component';
 import { EditHomeComponent } from './pages/home/edit-home/edit-home.component';
 import { AddBuildingComponent } from './pages/business/add-building/add-building.component';
 import { BuildingDetailsComponent } from './pages/business/building-details/building-details.component';
@@ -15,12 +17,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HotelRoomDetailsComponent } from './pages/hotel/hotel-room-details/hotel-room-details.component';
 import { EditCarComponent } from './pages/car-rent/edit-car/edit-car.component';
+import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/equipment-details.component';
 
 
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent},
   {path:"",redirectTo:'/homes',pathMatch:'full'},
   {path:"homes", component:HomesComponent},
+  {path:'equipments',component:EquipmentsComponent},
+  {path:'equipment-details',component:EquipmentDetailsComponent},
   {path:"home-details/:id", component:EditHomeComponent},
   {path:"agents", component: AgentListComponent},
   {path:"add-agent", component:AddAgentComponent},
@@ -33,7 +38,9 @@ const routes: Routes = [
   {path:"hotel-room-details/:id", component:HotelRoomDetailsComponent},
   {path:"business", component:BusinessListComponent},
   {path:"building-details/:id",component:BuildingDetailsComponent}, 
-  {path:"add-building",component:AddBuildingComponent}
+  {path:"add-building",component:AddBuildingComponent},
+  {path:"add-equipment",component:AddEquipmentComponent},
+  {path:"equipment-details/:id", component:EquipmentDetailsComponent},
 ];
 
 @NgModule({

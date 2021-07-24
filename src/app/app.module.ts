@@ -38,6 +38,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { EditHomeComponent } from './pages/home/edit-home/edit-home.component';
 import { EditCarComponent } from './pages/car-rent/edit-car/edit-car.component';
+import { EquipmentsComponent } from './pages/equipments/equipments.component';
+import { AddEquipmentComponent } from './pages/equipments/add-equipment/add-equipment.component';
+import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/equipment-details.component';
+import { EquipmentListComponent } from './pages/equipments/equipment-list/equipment-list.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,12 @@ import { EditCarComponent } from './pages/car-rent/edit-car/edit-car.component';
     BuildingDetailsComponent,
     EditBusinessUnitComponent,
     EditHomeComponent,
-    EditCarComponent
+    EditCarComponent,
+    EquipmentsComponent,
+    AddEquipmentComponent,
+    EquipmentDetailsComponent,
+    EquipmentListComponent
+  
   ],
   imports: [
     BrowserModule,
