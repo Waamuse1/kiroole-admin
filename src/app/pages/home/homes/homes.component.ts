@@ -32,5 +32,10 @@ export class HomesComponent implements OnInit {
       this.ngxService.stop();
     })
   }
+  refreshData($event) {
+    console.log($event);
+    console.log('refreshing');
+    this.getHomes();  
+  }
 
 }

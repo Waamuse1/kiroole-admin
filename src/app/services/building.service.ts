@@ -41,6 +41,16 @@ export class BuildingService {
       observe: "response",     
     });
   }
+  deleteBuilding(buildingId:string){
+    return this.http.delete<any>(`${config.apiUrl}building/${buildingId}`, {
+      observe: "response",     
+    });
+  }
+  deleteOffice(officeId:string){
+    return this.http.delete<any>(`${config.apiUrl}offices/${officeId}`, {
+      observe: "response",     
+    });
+  }
 
   
 }

@@ -19,6 +19,22 @@
                
               </div>
               <div class="row">
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group">
+                      <label>Listing Type</label>
+                      <select class="form-control" formControlName="listingType">                   
+                        <option *ngFor="let type of listingType" value="{{type}}">{{type}}</option>                    
+                      </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group">
+                      <label>Price</label>
+                      <input type="number" class="form-control" formControlName="price" placeholder="Price (USD)" />
+                    </div>
+                </div>
+                </div>
+              <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                         <label>Application Type</label>

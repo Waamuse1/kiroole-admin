@@ -26,4 +26,10 @@ export class EquipmentService {
       observe: "response",     
     });
   }
+
+  deleteEquipment(id:string){
+    return this.http.delete<any>(`${config.apiUrl}equipment/${id}`, {
+      observe: "response",     
+    });
+  }
 }

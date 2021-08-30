@@ -1,3 +1,6 @@
+import { BuildingService } from './../../../services/building.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ConfirmationService } from './../../../services/confirmation.service';
 import { BuildingOffice } from './../../../models/building_office.res.model';
 import { AddBusinessUnitComponent } from './../add-business-unit/add-business-unit.component';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -17,7 +20,8 @@ export class BusinessUnitListComponent implements OnInit {
   @Output()
    loadEvent = new EventEmitter<boolean>();
 
-  constructor(private modalService: NgbModal,) { }
+  constructor(private modalService: NgbModal,private confirmationService:ConfirmationService,
+    private ngxService: NgxUiLoaderService,private buildingService:BuildingService) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +49,27 @@ export class BusinessUnitListComponent implements OnInit {
   }
   sendLoadEvent() {
     this.loadEvent.emit(true);
+  }
+  onOfficeDelete(id:any){
+    console.log('office delete',id);
+    this.confirmationService.confirmThis('Are you sure you want to delete this Office ?', () =>  {
+      this.ngxService.start();   
+      this.buildingService.deleteOffice(id).subscribe(res => {
+        console.log(res);     
+        
+        
+        this.ngxService.stop();
+      }, error => {
+        
+        this.ngxService.stop();
+        
+
+        console.log(error);
+      })
+      
+    }, () => {
+     console.log('cancelled');
+    });
   }
   
 

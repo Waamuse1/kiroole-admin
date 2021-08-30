@@ -1,8 +1,6 @@
 export const config = Object.freeze({
-  apiUrl:"https://kiroole.net/api/",
-  // apiUrl:"http://localhost:3000/",
-  productionUrl:"https://vsbackend.afrinettelecom.com/api/",
-  localUrl:"http://localhost:5000/api/",
+  // apiUrl:"https://kiroole.net/api/",
+  apiUrl:"http://localhost:3000/",
   
 });
 export const cities = [
@@ -19,6 +17,10 @@ export const furniture = [
 ];
 export const equipmentType = [
   "Farming", "Construction",
+]
+
+export const listingType = [
+  "For Sale", "For Hire",
 ]
 
 

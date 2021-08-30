@@ -1,3 +1,4 @@
+import { ConfirmationModule } from './confirmation/confirmation.module';
 import { HomesService } from './services/homes.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -42,6 +43,7 @@ import { EquipmentsComponent } from './pages/equipments/equipments.component';
 import { AddEquipmentComponent } from './pages/equipments/add-equipment/add-equipment.component';
 import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/equipment-details.component';
 import { EquipmentListComponent } from './pages/equipments/equipment-list/equipment-list.component';
+import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,7 @@ import { EquipmentListComponent } from './pages/equipments/equipment-list/equipm
     EquipmentsComponent,
     AddEquipmentComponent,
     EquipmentDetailsComponent,
-    EquipmentListComponent
+    EquipmentListComponent,
   
   ],
   imports: [
@@ -86,6 +88,7 @@ import { EquipmentListComponent } from './pages/equipments/equipment-list/equipm
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxUiLoaderModule,
+    ConfirmationModule,
     ToastrModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDUnDtzxWOs9Z5zBmJpNvSWq-Ttyv4vzfA',

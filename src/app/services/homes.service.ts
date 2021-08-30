@@ -28,4 +28,10 @@ export class HomesService {
       observe: "response",     
     });
   }
+
+  deleteHome(homeId){
+    return this.http.delete<any>(`${config.apiUrl}homes/${homeId}`, {
+      observe: "response",     
+    });
+  }
 }

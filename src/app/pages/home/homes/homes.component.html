@@ -5,6 +5,6 @@
     </div>
     
         <div class="row">
-            <app-homes-list [homes]="homes" ></app-homes-list>
+            <app-homes-list [homes]="homes"  (deleteEvent)="refreshData($event)" ></app-homes-list>
         
     </div>

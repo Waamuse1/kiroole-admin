@@ -1,3 +1,4 @@
+import { ConfirmationService } from './../../../services/confirmation.service';
 import { Room } from './../../../models/hotel_rooms.res.model';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -17,7 +18,7 @@ export class RoomDetailsComponent implements OnInit {
   hotelId:string;
   hotelRooms:Room[];
 
-  constructor( private modalService: NgbModal,private hotelService:HotelsService,
+  constructor( private modalService: NgbModal,private hotelService:HotelsService,private confirmationService:ConfirmationService,
     private ngxService: NgxUiLoaderService,private toast: ToastrService,) { }
 
   ngOnInit(): void {
@@ -64,6 +65,28 @@ export class RoomDetailsComponent implements OnInit {
       // }
       });
 
+  }
+  onRoomDelete(id){
+    console.log('delete room',id);
+    this.confirmationService.confirmThis('Are you sure you want to delete this Room ?', () =>  {
+      this.ngxService.start();   
+      this.hotelService.deleteRoom(id).subscribe(res => {
+        console.log(res);
+      this.getHotelRooms();
+        
+        
+        this.ngxService.stop();
+      }, error => {
+        this.getHotelRooms();
+        this.ngxService.stop();
+        
+
+        console.log(error);
+      })
+      
+    }, () => {
+     console.log('cancelled');
+    });
   }
 
   

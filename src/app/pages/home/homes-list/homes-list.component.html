@@ -1,3 +1,4 @@
+<app-confirmation></app-confirmation>
 <div class="my-properties">
     <table class="table-responsive">
         <thead>
@@ -21,8 +22,13 @@
                 </td>
                 <td>{{home.createdAt | date}}</td>               
                 <td class="actions">
-                    <a routerLink="/home-details/{{home.id}}"   class="edit"><i class="lni-pencil"></i>Edit</a>
+                    <!-- <a routerLink="/home-details/{{home.id}}"   class="edit"><i class="lni-pencil"></i>Edit</a>
                     <a href="#"><i class="far fa-trash-alt"></i></a>
+
+                    <a class="edit"><i class="lni-pencil"></i>Delete</a>
+                    <a href="#"><i class="far "></i></a> -->
+                    <button  routerLink="/home-details/{{home.id}}" class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
+                     <button class="btn btn-primary btn-action" (click)="onDelete(home.id)"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
                 </td>
             </tr>     
             

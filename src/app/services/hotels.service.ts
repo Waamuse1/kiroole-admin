@@ -29,6 +29,13 @@ export class HotelsService {
       observe: "response",     
     });
   }
+  deleteHotel(hotelId){
+    return this.http.delete<any>(`${config.apiUrl}hotels/${hotelId}`, {
+      observe: "response",     
+    });
+  }
+
+  
 
   addRoom(roomPayload:RoomPayload){
     return this.http.post(`${config.apiUrl}hotelroom`,roomPayload, {
@@ -38,6 +45,12 @@ export class HotelsService {
 
   getHotelRooms(hotelId:string){
     return this.http.get<HotelRoomRes>(`${config.apiUrl}hotelroom/${hotelId}`, {
+      observe: "response",     
+    });
+  }
+
+  deleteRoom(roomId){
+    return this.http.delete<any>(`${config.apiUrl}hotelroom/${roomId}`, {
       observe: "response",     
     });
   }

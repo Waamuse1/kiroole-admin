@@ -8,7 +8,7 @@ import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core'
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AgentService } from 'src/app/services/agent.service';
 import { AgentPayload } from 'src/app/payloads/agent.payload';
-import { equipmentType, cities } from 'src/app/constants/global';
+import { equipmentType, cities, listingType } from 'src/app/constants/global';
 @Component({
   selector: 'app-add-equipment',
   templateUrl: './add-equipment.component.html',
@@ -29,6 +29,8 @@ export class AddEquipmentComponent implements OnInit {
   cities = cities;
   images = [];
   filesToUpload: Array<File> = [];
+  listingType = listingType;
+
 
   constructor(private mapsAPILoader: MapsAPILoader,
     private router:Router,private ngZone: NgZone,private fb:FormBuilder,
@@ -91,7 +93,9 @@ export class AddEquipmentComponent implements OnInit {
       city:['',Validators.required],
       country:['',Validators.required],
       type:['', Validators.required],     
-      address:[{value: '', disabled: true}]
+      address:[{value: '', disabled: true}],
+      price:['',Validators.required],
+      listingType:['',Validators.required]
 
     });
 
@@ -207,6 +211,8 @@ export class AddEquipmentComponent implements OnInit {
     formData.append('type',this.f_data.type.value);
     formData.append('country',this.f_data.country.value);
     formData.append('agentId',this.f_data.agentId.value);
+    formData.append('price',this.f_data.price.value);
+    formData.append('listingType',this.f_data.listingType.value);
     formData.append('location_address',this.address);
     formData.append('latitude', this.latitude.toString());
     formData.append('longitude',this.longitude.toString());

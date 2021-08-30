@@ -1,3 +1,5 @@
+<app-confirmation></app-confirmation>
+
 <div class="dashborad-box">
     <h4 class="title">Rooms</h4>
     <button class="btn btn-primary" (click)="openAddRoomModal()" >New Rooms</button>
@@ -25,7 +27,7 @@
                             <button class="btn btn-primary btn-action" (click)="openEditModal()">                               
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </button>
-                            <button class="btn btn-primary btn-action">
+                            <button class="btn btn-primary btn-action" (click)="onRoomDelete(room.id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>

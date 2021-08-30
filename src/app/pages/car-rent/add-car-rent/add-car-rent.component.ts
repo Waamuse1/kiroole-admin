@@ -1,4 +1,4 @@
-import { carType } from './../../../constants/global';
+import { carType, listingType } from './../../../constants/global';
 import { Router } from '@angular/router';
 import { CarService } from './../../../services/car.service';
 import { AgentService } from './../../../services/agent.service';
@@ -21,6 +21,7 @@ export class AddCarRentComponent implements OnInit {
   carForm:FormGroup;
   agents:Agent[];
   car_Type = carType;
+  listingType = listingType;
 
   constructor(private fb: FormBuilder,private toast: ToastrService,private agentService:AgentService, 
     private ngxService: NgxUiLoaderService,private carService:CarService,private router:Router) { }
@@ -40,7 +41,9 @@ export class AddCarRentComponent implements OnInit {
       ratePerDay:['',Validators.required],
       transmission:['',Validators.required],
       fuel:['',Validators.required],
-      carType:['',Validators.email]
+      carType:['',Validators.required],
+      description:['',Validators.required],
+      listingType:['',Validators.required]
 
     })
   }
@@ -146,7 +149,9 @@ export class AddCarRentComponent implements OnInit {
       formData.append('ratePerDay', this.f_data.ratePerDay.value),
       formData.append('transmission', this.f_data.transmission.value),
       formData.append('fuel', this.f_data.fuel.value),
-      formData.append('vehicleType', this.f_data.carType.value)
+      formData.append('vehicleType', this.f_data.carType.value),
+      formData.append('listingType', this.f_data.listingType.value)
+      formData.append('description', this.f_data.description.value)
   
       for (let i = 0; i < this.filesToUpload.length; i++) {
   

@@ -1,3 +1,5 @@
+<app-confirmation></app-confirmation>
+
 <div class="dashborad-box">
     <h4 class="title">Buildings $ Offices Units</h4>
     <button class="btn btn-primary" [routerLink]="['/add-building']" >New Building</button>
@@ -15,15 +17,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let building of buildings" routerLink="/building-details/{{building.id}}" class="table-row">
+                    <tr *ngFor="let building of buildings"  class="table-row">
                         <td>{{building.buildingName}}</td>
                         <td>{{building.city}}</td>
                         <td class="rating"><span>50</span></td>
                         <td>{{building.agent.phoneNumber}}</td>
                         <td class="status"><span class=" active">{{building.isActive}}</span></td>
                         <td class="edit">
-                            <button class="btn btn-primary btn-action"><i class="fa fa-edit"></i></button>
-                            <button class="btn btn-primary btn-action"><i class="fa fa-trash"></i></button>
+                            <button routerLink="/building-details/{{building.id}}" class="btn btn-primary btn-action"><i class="fa fa-edit"></i></button>
+                            <button (click)="onBusinessDelete(building.id)" class="btn btn-primary btn-action"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>                    
                    

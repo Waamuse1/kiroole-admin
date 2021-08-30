@@ -1,3 +1,4 @@
+import { ConfirmationService } from './../../../services/confirmation.service';
 import { BuildingService } from './../../../services/building.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +14,7 @@ export class BusinessListComponent implements OnInit {
   buildings:Building[];
 
   constructor(private ngxService: NgxUiLoaderService,private toast: ToastrService,
-    private buildingService:BuildingService) { }
+    private buildingService:BuildingService,private confirmationService:ConfirmationService,) { }
 
   ngOnInit(): void {
     this.getAllBuildings();
@@ -33,6 +34,32 @@ export class BusinessListComponent implements OnInit {
       console.log(error);
       this.toast.error("Unable to load building","Error !");
     })
+  }
+
+  onBusinessDelete(id:string){
+    this.confirmationService.confirmThis('Are you sure you want to delete this Building ?', () =>  {
+      this.ngxService.start();   
+      this.buildingService.deleteBuilding(id).subscribe(res => {
+        console.log(res);  
+        this.getAllBuildings();   
+        
+        
+        this.ngxService.stop();
+        
+      }, error => {
+        
+        this.ngxService.stop();
+        
+
+        console.log(error);
+      })
+      
+    }, () => {
+    this.getAllBuildings();  
+
+     console.log('cancelled');
+    });
+
   }
 
 }

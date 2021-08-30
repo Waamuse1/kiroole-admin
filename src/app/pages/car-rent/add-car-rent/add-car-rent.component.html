@@ -33,28 +33,52 @@
                   </select>
                 </div>
             </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea
+                  class="form-control"
+                  formControlName="description"
+                  placeholder="Description"
+                ></textarea>
+              </div>
+            </div>
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
                   <label> No of Passages</label>
                   <input type="text" class="form-control" formControlName="noOfPassengers" placeholder="No of Passengers" />
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4">
-                <div class="form-group">
-                    <label> Rate per Day</label>
-                    <input type="number" class="form-control" formControlName="ratePerDay" placeholder="Rate per day (USD)" />
-                  </div>
-              </div>
+           
         </div>
-        <div class="row">              
-            <div class="col-md-4 col-lg-4">
-                <div class="form-group">
-                  <label>Agent (Owner)</label>
-                  <select class="form-control" formControlName="agentId">
-                    <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.agentName}}</option>                    
-                  </select>
-                </div>
-              </div> 
+        <div class="row">
+          <div class="col-md-4 col-lg-4">
+            <div class="form-group">
+                <label>Listing Type</label>
+                <select class="form-control" formControlName="listingType">                   
+                  <option *ngFor="let type of listingType" value="{{type}}">{{type}}</option>                    
+                </select>
+              </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" class="form-control" formControlName="ratePerDay" placeholder="Price (USD)" />
+              </div>
+          </div>
+
+          <div class="col-md-4 col-lg-4">
+            <div class="form-group">
+              <label>Agent (Owner)</label>
+              <select class="form-control" formControlName="agentId">
+                <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.agentName}}</option>                    
+              </select>
+            </div>
+          </div> 
+
+        </div>
+        <div class="row">       
+            
               <div class="col-md-4 col-lg-4">
                 <div class="form-group">
                   <label>Transmission</label>

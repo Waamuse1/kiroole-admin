@@ -28,4 +28,9 @@ export class CarService {
       observe: "response",     
     });
   }
+  deleteVehicle(vehicleId){
+    return this.http.delete<any>(`${config.apiUrl}vehicle/${vehicleId}`, {
+      observe: "response",     
+    });
+  }
 }

@@ -1,3 +1,5 @@
+<app-confirmation></app-confirmation>
+
 <div class="dashborad-box">
     <h4 class="title">Office Units</h4>
     <button class="btn btn-primary" (click)="openAddRoomModal()" >New Office Unit</button>
@@ -27,7 +29,7 @@
                             <button class="btn btn-primary btn-action" (click)="openEditModal()">                               
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </button>
-                            <button class="btn btn-primary btn-action">
+                            <button (click)="onOfficeDelete(office.id)" class="btn btn-primary btn-action">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
