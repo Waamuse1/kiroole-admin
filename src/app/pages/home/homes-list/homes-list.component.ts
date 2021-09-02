@@ -3,7 +3,7 @@ import { HomesService } from './../../../services/homes.service';
 import { ConfirmationService } from './../../../services/confirmation.service';
 import { Home } from './../../../models/homes_res.model';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash,faInfo } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -16,6 +16,7 @@ export class HomesListComponent implements OnInit {
   homes:Home[];
   editIcon = faEdit;
   deleteIcon = faTrash;
+  infoIcon = faInfo;
   @Output() deleteEvent = new EventEmitter<any>();
 
   constructor(private confirmationService:ConfirmationService, private homeService:HomesService,private ngxService: NgxUiLoaderService,) { }

@@ -44,6 +44,8 @@ import { AddEquipmentComponent } from './pages/equipments/add-equipment/add-equi
 import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/equipment-details.component';
 import { EquipmentListComponent } from './pages/equipments/equipment-list/equipment-list.component';
 import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MainComponent } from './pages/main/main.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { ConfirmationComponent } from './pages/confirmation/confirmation.compone
     AddEquipmentComponent,
     EquipmentDetailsComponent,
     EquipmentListComponent,
+    LoginComponent,
+    MainComponent,
   
   ],
   imports: [

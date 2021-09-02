@@ -1,6 +1,6 @@
 export const config = Object.freeze({
-  // apiUrl:"https://kiroole.net/api/",
-  apiUrl:"http://localhost:3000/",
+  apiUrl:"https://kiroole.net/api/",
+  // apiUrl:"http://localhost:3000/",
   
 });
 export const cities = [

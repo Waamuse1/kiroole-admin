@@ -1,0 +1,11 @@
+.container-fluid{
+    /* position: relative; */
+    
+}
+.login-form{
+    margin: auto;
+    padding: 20px;
+    margin-top: 10%;
+    width: 50%;   
+    /* border: 1px solid gray; */
+}

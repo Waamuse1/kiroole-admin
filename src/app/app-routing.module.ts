@@ -1,3 +1,6 @@
+import { AuthGuardService } from './services/auth-guard.service';
+import { MainComponent } from './pages/main/main.component';
+import { LoginComponent } from './pages/login/login.component';
 import { AddEquipmentComponent } from './pages/equipments/add-equipment/add-equipment.component';
 import { EquipmentsComponent } from './pages/equipments/equipments.component';
 import { EditHomeComponent } from './pages/home/edit-home/edit-home.component';
@@ -21,6 +24,8 @@ import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/
 
 
 const routes: Routes = [
+  {path:'login',component:LoginComponent},
+  {path:'',component:MainComponent, canActivate: [AuthGuardService], children:[
   {path:"dashboard",component:DashboardComponent},
   {path:"",redirectTo:'/homes',pathMatch:'full'},
   {path:"homes", component:HomesComponent},
@@ -41,6 +46,9 @@ const routes: Routes = [
   {path:"add-building",component:AddBuildingComponent},
   {path:"add-equipment",component:AddEquipmentComponent},
   {path:"equipment-details/:id", component:EquipmentDetailsComponent},
+
+  ]},
+  
 ];
 
 @NgModule({
