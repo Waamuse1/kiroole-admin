@@ -20,7 +20,7 @@ export const equipmentType = [
 ]
 
 export const listingType = [
-  "For Sale", "For Hire",
+  "For Sale", "For Hire","For Rent"
 ]
 
 
