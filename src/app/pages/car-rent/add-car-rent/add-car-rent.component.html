@@ -8,6 +8,11 @@
                   <label>Vehicle Make</label>
                   <input type="text" class="form-control" formControlName="vehicleMake" placeholder="Vehicle Make" />
                 </div>
+                <div *ngIf="carForm.controls['vehicleMake'].invalid && carForm.controls['vehicleMake'].touched" class="alert alert-danger">
+                  <div *ngIf="carForm.controls['vehicleMake'].errors.required">
+                Vehicle Make is required.
+                </div>
+              </div>
   
             </div>
             <div class="col-md-4 col-lg-4">
@@ -15,6 +20,11 @@
                   <label>Vehicle Model</label>
                   <input type="text" class="form-control" formControlName="vehicleModel" placeholder="Vehicle Model" />
                 </div>
+                <div *ngIf="carForm.controls['vehicleModel'].invalid && carForm.controls['vehicleModel'].touched" class="alert alert-danger">
+                  <div *ngIf="carForm.controls['vehicleModel'].errors.required">
+                Vehicle Make is required.
+                </div>
+              </div>
             </div>
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
@@ -32,6 +42,11 @@
                     <option *ngFor="let type of car_Type" value="{{type}}">{{type}}</option>                    
                   </select>
                 </div>
+                <div *ngIf="carForm.controls['carType'].invalid && carForm.controls['carType'].touched" class="alert alert-danger">
+                  <div *ngIf="carForm.controls['carType'].errors.required">
+                Vehicle Type is required.
+                </div>
+              </div>
             </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group">
@@ -48,6 +63,11 @@
                   <label> No of Passages</label>
                   <input type="text" class="form-control" formControlName="noOfPassengers" placeholder="No of Passengers" />
                 </div>
+                <div *ngIf="carForm.controls['noOfPassengers'].invalid && carForm.controls['noOfPassengers'].touched" class="alert alert-danger">
+                  <div *ngIf="carForm.controls['noOfPassengers'].errors.required">
+                Please Provide Number of Passengers.
+                </div>
+              </div>
             </div>
            
         </div>
@@ -59,12 +79,22 @@
                   <option *ngFor="let type of listingType" value="{{type}}">{{type}}</option>                    
                 </select>
               </div>
+              <div *ngIf="carForm.controls['listingType'].invalid && carForm.controls['listingType'].touched" class="alert alert-danger">
+                <div *ngIf="carForm.controls['listingType'].errors.required">
+              Listing type is required.
+              </div>
+            </div>
           </div>
           <div class="col-md-4 col-lg-4">
             <div class="form-group">
                 <label>Price</label>
                 <input type="number" class="form-control" formControlName="ratePerDay" placeholder="Price (USD)" />
               </div>
+              <div *ngIf="carForm.controls['ratePerDay'].invalid && carForm.controls['ratePerDay'].touched" class="alert alert-danger">
+                <div *ngIf="carForm.controls['ratePerDay'].errors.required">
+              Rate is required.
+              </div>
+            </div>
           </div>
 
           <div class="col-md-4 col-lg-4">
@@ -74,6 +104,11 @@
                 <option *ngFor="let agent of agents" value="{{agent.id}}">{{agent.agentName}}</option>                    
               </select>
             </div>
+            <div *ngIf="carForm.controls['agentId'].invalid && carForm.controls['agentId'].touched" class="alert alert-danger">
+              <div *ngIf="carForm.controls['agentId'].errors.required">
+            Agent is required.
+            </div>
+          </div>
           </div> 
 
         </div>
@@ -88,6 +123,11 @@
                     <option value="hybrid">hybrid</option>
                   </select>
                 </div>
+                <div *ngIf="carForm.controls['transmission'].invalid && carForm.controls['transmission'].touched" class="alert alert-danger">
+                  <div *ngIf="carForm.controls['transmission'].errors.required">
+              Required.
+                </div>
+              </div>
               </div> 
               <div class="col-md-4 col-lg-4">
                 <div class="form-group">
@@ -98,6 +138,11 @@
                     <option value="Electric">Electric</option>
                   </select>
                 </div>
+                <div *ngIf="carForm.controls['fuel'].invalid && carForm.controls['fuel'].touched" class="alert alert-danger">
+                  <div *ngIf="carForm.controls['fuel'].errors.required">
+                Required.
+                </div>
+              </div>
               </div>           
             
         </div> 
@@ -147,7 +192,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-            <button class="btn btn-primary" (click)="onSubmit()" type="submit">Submit</button>
+            <button class="btn btn-primary"  [disabled]="!carForm.valid" (click)="onSubmit()" type="submit">Submit</button>
     </div>
 </div>
 

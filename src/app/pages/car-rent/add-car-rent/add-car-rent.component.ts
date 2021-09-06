@@ -36,7 +36,7 @@ export class AddCarRentComponent implements OnInit {
       vehicleMake:['',Validators.required],
       vehicleModel:['',Validators.required],
       manufactureYear:['',Validators.required],
-      plateNo:['',Validators.required],
+      // plateNo:['',Validators.required],
       noOfPassengers:['',Validators.required],
       ratePerDay:['',Validators.required],
       transmission:['',Validators.required],
