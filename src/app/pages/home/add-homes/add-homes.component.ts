@@ -224,13 +224,13 @@ export class AddHomesComponent implements OnInit {
       }
     }
 
-    if (!isValid) {
-      this.toast.info('Low Resolution image, Please select another Image',"Warning");
-      this.ngxService.stop();
-      return;
+    // if (!isValid) {
+    //   this.toast.info('Low Resolution image, Please select another Image',"Warning");
+    //   this.ngxService.stop();
+    //   return;
    
  
-    }else{
+    // }else{
       console.log(this.homeForm.value);
       const formData = new FormData();
       formData.append('agentId',this.f_data.owner.value);
@@ -284,7 +284,7 @@ export class AddHomesComponent implements OnInit {
       })
   
       
-    }
+    // }
   }
 
   onSave(){

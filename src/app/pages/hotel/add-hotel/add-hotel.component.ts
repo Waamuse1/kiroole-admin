@@ -220,11 +220,11 @@ export class AddHotelComponent implements OnInit {
       }
     }
 
-    if (!isValid) {
-      this.ngxService.stop();
-      this.toast.info("Low resolution images","Warning !");
-      console.log('invalid checks')
-    } else {
+    // if (!isValid) {
+    //   this.ngxService.stop();
+    //   this.toast.info("Low resolution images","Warning !");
+    //   console.log('invalid checks')
+    // } else {
       const formData = new FormData();
       formData.append("hotelName", this.f_data.hotelName.value),
       formData.append("city", this.f_data.city.value),
@@ -264,7 +264,7 @@ export class AddHotelComponent implements OnInit {
       
 
 
-    }
+    // }
   }
   
 

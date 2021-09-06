@@ -133,12 +133,12 @@ export class AddCarRentComponent implements OnInit {
       }
     }
 
-    if (!isValid) {
-      this.toast.info('Low Resolution image, Please select another Image',"Warning");
-      this.ngxService.stop();
-      return;
+    // if (!isValid) {
+    //   this.toast.info('Low Resolution image, Please select another Image',"Warning");
+    //   this.ngxService.stop();
+    //   return;
  
-    }else{
+    // }else{
       const formData = new FormData();
       formData.append('agentId', this.f_data.agentId.value),
       formData.append('vehicleMake', this.f_data.vehicleMake.value),
@@ -176,7 +176,7 @@ export class AddCarRentComponent implements OnInit {
       })
   
       
-    }
+    // }
   }
   
 

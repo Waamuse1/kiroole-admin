@@ -198,12 +198,12 @@ export class AddEquipmentComponent implements OnInit {
       }
     }
 
-    if (!isValid) {
-      this.toast.info('Low Resolution image, Please select another Image',"Warning");
-      this.ngxService.stop();
-      return; 
+    // if (!isValid) {
+    //   this.toast.info('Low Resolution image, Please select another Image',"Warning");
+    //   this.ngxService.stop();
+    //   return; 
  
-    }else{
+    // }else{
     const formData = new FormData();
     formData.append('equipment_name',this.f_data.equipmentName.value);
     formData.append('description',this.f_data.desc.value);
@@ -243,7 +243,7 @@ export class AddEquipmentComponent implements OnInit {
       console.log(error);
     })
 
-  }
+  // }
    
 
     

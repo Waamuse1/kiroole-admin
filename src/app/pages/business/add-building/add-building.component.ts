@@ -212,13 +212,13 @@ amenities: FormArray;
       }
     }
 
-    if (!isValid) {
-      // return;
-  console.log('invalid checks');
-  this.ngxService.stop();
-  this.toast.info("Low resolution image","Info");
-  return;
-    }else{
+  //   if (!isValid) {
+  //     // return;
+  // console.log('invalid checks');
+  // this.ngxService.stop();
+  // this.toast.info("Low resolution image","Info");
+  // return;
+  //   }else{
       const formData = new FormData();
     formData.append('buildingName',this.f_data.buildingName.value),
     formData.append('city',this.f_data.city.value),
@@ -260,7 +260,7 @@ amenities: FormArray;
       
   
       
-    }
+    // }
   }
   
 
