@@ -24,7 +24,7 @@
                         <td>{{agent.createdAt | date}}</td>
                         <td class="status"><span class=" active">{{agent.locationAddress}}</span></td>                       
                         <td class="edit">
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
+                            <button class="btn btn-primary btn-action" routerLink="/edit-agent/{{agent.id}}" ><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
                             <button class="btn btn-primary btn-action" (click)="onAgentDelete(agent.id)"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
                         </td>
                     </tr>                

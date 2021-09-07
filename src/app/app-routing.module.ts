@@ -1,3 +1,4 @@
+import { EditAgentComponent } from './pages/agents/edit-agent/edit-agent.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { MainComponent } from './pages/main/main.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path:'equipment-details',component:EquipmentDetailsComponent},
   {path:"home-details/:id", component:EditHomeComponent},
   {path:"agents", component: AgentListComponent},
+  {path:"edit-agent/:id", component: EditAgentComponent},
   {path:"add-agent", component:AddAgentComponent},
   {path:"add-home",component:AddHomesComponent},
   {path:"car-rent", component:CarRentListComponent},

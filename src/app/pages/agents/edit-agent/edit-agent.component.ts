@@ -1,21 +1,20 @@
-import { cities } from './../../../constants/global';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { AgentPayload } from './../../../payloads/agent.payload';
-import { AgentService } from './../../../services/agent.service';
-import { MapsAPILoader } from '@agm/core';
-import { Component, NgZone, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AgentService } from 'src/app/services/agent.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { MapsAPILoader } from '@agm/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { cities } from './../../../constants/global';
 
 @Component({
-  selector: 'app-add-agent',
-  templateUrl: './add-agent.component.html',
-  styleUrls: ['./add-agent.component.css']
+  selector: 'app-edit-agent',
+  templateUrl: './edit-agent.component.html',
+  styleUrls: ['./edit-agent.component.css']
 })
-export class AddAgentComponent implements OnInit {
-  agentForm:FormGroup;
-  cities = cities;
+export class EditAgentComponent implements OnInit {
+  agentEditForm:FormGroup;
+  city = cities;
 latitude: number;
   longitude: number;
   zoom:number;
@@ -26,12 +25,12 @@ latitude: number;
 
   constructor(private mapsAPILoader: MapsAPILoader,
     private router:Router,private ngZone: NgZone,private fb:FormBuilder,
-     private toastr: ToastrService,private agentService:AgentService, private ngxService: NgxUiLoaderService, ) { }
+     private toastr: ToastrService,private agentService:AgentService, private ngxService: NgxUiLoaderService,) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.initializeForm();
+
     this.setCurrentLocation();
-    this.initializeForm();
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder;
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
@@ -59,7 +58,7 @@ latitude: number;
     });
   }
   initializeForm(){
-    this.agentForm = this.fb.group({
+    this.agentEditForm = this.fb.group({
       agentName:['',Validators.required],
       ownerName:['',Validators.required],
       phoneNumber:['',Validators.required], 
@@ -67,11 +66,11 @@ latitude: number;
       email:[''],     
       address:[{value: '', disabled: true}]
 
-    }); 
+    });
 
   }
   get f_data() {
-    return this.agentForm.controls;
+    return this.agentEditForm.controls;
   }
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
@@ -99,7 +98,7 @@ latitude: number;
           this.zoom = 15;
           this.address = results[0].formatted_address;
           console.log(this.address);
-          this.agentForm.controls.address.setValue(this.address);
+          this.agentEditForm.controls.address.setValue(this.address);
         } else {
           window.alert('No results found');
         }
@@ -109,38 +108,10 @@ latitude: number;
 
     });
   }
-
-  onsubmit(){
-    this.ngxService.start();
-    var agent:AgentPayload = {
-      "agentName":this.f_data.agentName.value,
-      "ownerName":this.f_data.ownerName.value,
-      "city":this.f_data.city.value,
-      "phoneNumber":this.f_data.phoneNumber.value.toString(),
-      "locationAddress":this.address,
-      "latitude":this.latitude,
-      "longitude":this.longitude,
-      "isActive":true
-    }
-
-    this.agentService.createAgent(agent).subscribe(res=>{
-      this.ngxService.stop();
-      console.log(res.status);
-      console.log(res.body);
-      if(res.status == 201){
-        this.toastr.success('Agent Added Successfully', 'Success ');
-        this.router.navigate(['/agents']);
-      }else {
-        this.toastr.error("Unable to add agent Please try again later","Error!");
-      }
-    },error=>{
-      console.log(error);
-      this.toastr.error("Unable to add agent Please try again later","Error!");
-
-      this.ngxService.stop();
-
-    })
+  onUpdate(){
 
   }
+
+
 
 }

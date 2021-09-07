@@ -46,6 +46,7 @@ import { EquipmentListComponent } from './pages/equipments/equipment-list/equipm
 import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from './pages/main/main.component';
+import { EditAgentComponent } from './pages/agents/edit-agent/edit-agent.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { MainComponent } from './pages/main/main.component';
     EquipmentListComponent,
     LoginComponent,
     MainComponent,
+    EditAgentComponent,
   
   ],
   imports: [
