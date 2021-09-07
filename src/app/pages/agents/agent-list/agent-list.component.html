@@ -1,3 +1,5 @@
+<app-confirmation></app-confirmation>
+
 <div class="dashborad-box">
     <h4 class="title">Agents</h4>
     <button class="btn btn-primary" [routerLink]="['/add-agent']" >New Agent</button>
@@ -9,8 +11,7 @@
                         <th>Agent Name</th>
                         <th>Phone Number</th>
                         <th>Owner Name</th>
-                        <th>Mobile Number</th>
-                        <th>Owner Name</th>
+                        <th>Mobile Number</th>                        
                         <th>Address</th>
                         <th>Action</th>
                     </tr>
@@ -21,11 +22,10 @@
                         <td>{{agent.phoneNumber}}</td>
                         <td class="rating"><span>{{agent.ownerName}}</span></td>
                         <td>{{agent.createdAt | date}}</td>
-                        <td class="status"><span class=" active">{{agent.isActive}}</span></td>
-                        <td >{{agent.agentName}}</td>
+                        <td class="status"><span class=" active">{{agent.locationAddress}}</span></td>                       
                         <td class="edit">
                             <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="editIcon"></fa-icon></button>
-                            <button class="btn btn-primary btn-action"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
+                            <button class="btn btn-primary btn-action" (click)="onAgentDelete(agent.id)"><fa-icon class="fa" [icon]="deleteIcon"></fa-icon></button>
                         </td>
                     </tr>                
                     

@@ -27,5 +27,11 @@ export class AgentService {
       observe: "response",     
     },);
   }
+
+  deleteAgent(agentId){
+    return this.http.delete<any>(`${config.apiUrl}agent/${agentId}`, {
+      observe: "response",     
+    });
+  }
  
 }

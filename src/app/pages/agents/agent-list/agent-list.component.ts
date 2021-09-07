@@ -1,3 +1,4 @@
+import { ConfirmationService } from './../../../services/confirmation.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from './../../../services/agent.service';
@@ -16,7 +17,7 @@ export class AgentListComponent implements OnInit {
   agents:Agent[];
 
   constructor(private toastr: ToastrService,private agentService:AgentService, 
-    private ngxService: NgxUiLoaderService,) { }
+    private ngxService: NgxUiLoaderService,private confirmationService:ConfirmationService,) { }
 
   ngOnInit(): void {
     this.getAgents();
@@ -37,6 +38,29 @@ export class AgentListComponent implements OnInit {
       this.ngxService.stop();
     })
 
+  }
+  onAgentDelete(id:string){
+    console.log('deleting agent');
+    this.confirmationService.confirmThis('Are you sure to delete ?', () =>  {
+      this.ngxService.start();   
+      this.agentService.deleteAgent(id).subscribe(res => {
+        this.ngxService.stop();
+        console.log(res);
+        console.log(res.status);
+        this.getAgents();
+
+      },error => {
+        this.ngxService.stop();
+        this.getAgents();
+
+
+        console.log(error);
+      })
+     
+      
+    }, () => {
+     console.log('cancelled');
+    });
   }
 
 }
